@@ -9,23 +9,21 @@ st.info('This is app predict the level of damage of lead rubber bearings')
 
 with st.expander('Geometric characteristics of LRB'):
   st.write('**Raw data**')
-  df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
-  df
+  #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
+  #df
 
   st.write('**X**')
-  X_raw = df.drop('species', axis=1)
-  X_raw
 
   st.write('**y**')
-  y_raw = df.species
-  y_raw
+
 
 with st.expander('Mechanical Propierties of LRB Materials'):
-  st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+  #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+  st.write('**X**')
 
 # Input features
 with st.sidebar:
-  st.header('Input LRB propierties (Geometrical and mechanical')
+  st.header('Input LRB propierties (Geometrical and mechanical)')
   #Input propierties
   Di_mm = st.slider('LRB Diameter (mm)', 749.3, 952.5, 850.9,0.01) #1
   Ht_mm = st.slider('LRB High (mm)', 407.64, 420.34, 410.00,0.01) #2
@@ -44,32 +42,33 @@ with st.sidebar:
   #'Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)'
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
-  data = {'island': island,
+  """data = {'island': island,
           'bill_length_mm': bill_length_mm,
           'bill_depth_mm': bill_depth_mm,
           'flipper_length_mm': flipper_length_mm,
           'body_mass_g': body_mass_g,
           'sex': gender}
   input_df = pd.DataFrame(data, index=[0])
-  input_penguins = pd.concat([input_df, X_raw], axis=0)
+  input_penguins = pd.concat([input_df, X_raw], axis=0)"""
 
 with st.expander('Input features'):
   st.write('**Input Signal 1**')
-  S1=st.file_uploader("Choose a file in .txt format)
+  S1=st.file_uploader("Choose a file in .txt format")
   st.write('**Input Signal 2**')
-  S2=st.file_uploader("Choose a file in .txt format)
+  S2=st.file_uploader("Choose a file in .txt format")
+
 
 
 # Data preparation
 # Encode X
 encode = ['island', 'sex']
-df_penguins = pd.get_dummies(input_penguins, prefix=encode)
+#df_penguins = pd.get_dummies(input_penguins, prefix=encode)
 
-X = df_penguins[1:]
-input_row = df_penguins[:1]
+#X = df_penguins[1:]
+#input_row = df_penguins[:1]
 
 # Encode y
-target_mapper = {'Adelie': 0,
+"""target_mapper = {'Adelie': 0,
                  'Chinstrap': 1,
                  'Gentoo': 2}
 def target_encode(val):
@@ -82,24 +81,24 @@ with st.expander('Data preparation'):
   input_row
   st.write('**Encoded y**')
   y
-
+"""
 
 # Model training and inference
 ## Train the ML model
-clf = RandomForestClassifier()
-clf.fit(X, y)
+#clf = RandomForestClassifier()
+#clf.fit(X, y)
 
 ## Apply model to make predictions
-prediction = clf.predict(input_row)
+"""prediction = clf.predict(input_row)
 prediction_proba = clf.predict_proba(input_row)
 
 df_prediction_proba = pd.DataFrame(prediction_proba)
 df_prediction_proba.columns = ['Adelie', 'Chinstrap', 'Gentoo']
 df_prediction_proba.rename(columns={0: 'Adelie',
                                  1: 'Chinstrap',
-                                 2: 'Gentoo'})
+                                 2: 'Gentoo'})"""
 
-# Display predicted species
+"""# Display predicted species
 st.subheader('Predicted Species')
 st.dataframe(df_prediction_proba,
              column_config={
@@ -129,3 +128,4 @@ st.dataframe(df_prediction_proba,
 
 penguins_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
 st.success(str(penguins_species[prediction][0]))
+"""
