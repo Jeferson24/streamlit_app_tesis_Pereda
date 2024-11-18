@@ -54,10 +54,10 @@ with st.sidebar:
   input_penguins = pd.concat([input_df, X_raw], axis=0)
 
 with st.expander('Input features'):
-  st.write('**Input penguin**')
-  input_df
-  st.write('**Combined penguins data**')
-  input_penguins
+  st.write('**Input Signal 1**')
+  S1=st.file_uploader("Choose a file in .txt format)
+  st.write('**Input Signal 2**')
+  S2=st.file_uploader("Choose a file in .txt format)
 
 
 # Data preparation
