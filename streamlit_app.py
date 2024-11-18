@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
-icon1=st.image("https://drive.google.com/file/d/1Oy0px9ffF4Xdz-Jriza4DnnabsV4BStn/view?usp=drive_link")
-st.set_page_config(page_title=None, page_icon=icon1, layout="centered", initial_sidebar_state="expanded", menu_items=None)
+
+st.set_page_config(page_title=None, page_icon=None, layout="centered", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 
 st.info('This is app predict the level of damage of lead rubber bearings')
@@ -52,12 +52,12 @@ with st.sidebar:
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
 
-with st.expander('Input features'):
+"""with st.expander('Input features'):
   st.write('**Input Signal 1**')
   S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
 
   st.write('**Input Signal 2**')
-  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")
+  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")"""
 
 
 # Data preparation
