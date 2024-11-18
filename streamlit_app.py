@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
+icon1=st.image("https://drive.google.com/file/d/1Oy0px9ffF4Xdz-Jriza4DnnabsV4BStn/view?usp=drive_link")
+st.set_page_config(page_title=None, page_icon=icon1, layout="centered", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 
 st.info('This is app predict the level of damage of lead rubber bearings')
@@ -15,6 +17,7 @@ with st.expander('Geometric characteristics of LRB'):
   st.write('**X**')
 
   st.write('**y**')
+  
 
 
 with st.expander('Mechanical Propierties of LRB Materials'):
@@ -38,18 +41,16 @@ with st.sidebar:
   E_cau_mpa= st.slider('Vertical Elastic Modulus (Mpa)', 1.00, 2.00, 1.44,0.01) #11
   G_cau_mpa = st.slider('Shear Modulus of Rubber (Mpa)', 0.300, 0.500, 0.392,0.001) #12
   Fycort_pb_mpa = st.slider('Yield Shear Stress of Lead (Mpa)', 5.00, 10.00, 8.33,0.01) #13
+  st.write('**Input Signal 1**')
+  S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
+
+  st.write('**Input Signal 2**')
+  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")
+
 
   #'Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)'
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
-  """data = {'island': island,
-          'bill_length_mm': bill_length_mm,
-          'bill_depth_mm': bill_depth_mm,
-          'flipper_length_mm': flipper_length_mm,
-          'body_mass_g': body_mass_g,
-          'sex': gender}
-  input_df = pd.DataFrame(data, index=[0])
-  input_penguins = pd.concat([input_df, X_raw], axis=0)"""
 
 with st.expander('Input features'):
   st.write('**Input Signal 1**')
