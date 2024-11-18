@@ -53,10 +53,10 @@ with st.sidebar:
 
 with st.expander('Input features'):
   st.write('**Input Signal 1**')
-  S1=st.file_uploader("Choose a file in .txt format")
-  st.write('**Input Signal 2**')
-  S2=st.file_uploader("Choose a file in .txt format")
+  S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
 
+  st.write('**Input Signal 2**')
+  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")
 
 
 # Data preparation
