@@ -37,7 +37,7 @@ with st.sidebar:
   Fy_ac_mpa=st.slider('Yield Strees Steel (Mpa)', 165, 345, 250,1) #10
   E_cau_mpa= st.slider('Vertical Elastic Modulus (Mpa)', 1.00, 2.00, 1.44,0.01) #11
   G_cau_mpa = st.slider('Shear Modulus of Rubber (Mpa)', 0.300, 0.500, 0.392,0.001) #12
-  Fycort_pb_mpa = st.slider('Yield Shear Stress of Lead (Mpa)', 5.00, 8.33, 10,0.01) #13
+  Fycort_pb_mpa = st.slider('Yield Shear Stress of Lead (Mpa)', 5.00, 10, 8.33,0.01) #13
 
   #'Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)'
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
