@@ -3,11 +3,11 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
-st.title('🤖 Machine Learning App')
+st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 
-st.info('This is app builds a machine learning model!')
+st.info('This is app predict the level of damage of lead rubber bearings')
 
-with st.expander('Data'):
+with st.expander('Geometric characteristics of LRB'):
   st.write('**Raw data**')
   df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
   df
@@ -20,7 +20,7 @@ with st.expander('Data'):
   y_raw = df.species
   y_raw
 
-with st.expander('Data visualization'):
+with st.expander('Mechanical Propierties of LRB Materials'):
   st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
 
 # Input features
