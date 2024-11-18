@@ -33,7 +33,7 @@ with st.sidebar:
   cc_und = st.slider('Number Rubber Layers', 10, 30, 28,1) #6
   e_cc_mm = st.slider('Thickness of Interior Rubber Layers (mm)', 5, 8, 10,1) #7
   cs_und = st.slider('Number Steel Layers', 10, 30, 27,1) #8
-  e_cs_mm= st.slider('Thickness of Interior Steel Layers (mm)', 2, 4, 3.04,0.01) #9
+  e_cs_mm= st.slider('Thickness of Interior Steel Layers (mm)', 2.00, 4.00, 3.04,0.01) #9
   Fy_ac_mpa=st.slider('Yield Strees Steel (Mpa)', 165, 345, 250,1) #10
   E_cau_mpa= st.slider('Vertical Elastic Modulus (Mpa)', 1.00, 2.00, 1.44,0.01) #11
   G_cau_mpa = st.slider('Shear Modulus of Rubber (Mpa)', 0.3, 0.5, 0.392,0.001) #12
