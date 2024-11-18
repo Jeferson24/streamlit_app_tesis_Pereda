@@ -9,7 +9,7 @@ st.title('Non-invasive semi-automatic inspection system for lead rubber bearings
 
 st.info('This is app predict the level of damage of lead rubber bearings')
 
-with st.expander('Geometric characteristics of LRB'):
+with st.expander('Geometric characteristics of LRB',expanded=True):
   st.write('**Raw data**')
   #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
   #df
@@ -20,7 +20,7 @@ with st.expander('Geometric characteristics of LRB'):
   
 
 
-with st.expander('Mechanical Propierties of LRB Materials'):
+with st.expander('Mechanical Propierties of LRB Materials',expanded=True):
   #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
   st.write('**X**')
 
@@ -52,12 +52,12 @@ with st.sidebar:
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
 
-"""with st.expander('Input features'):
+with st.expander('Input features',expanded=True):
   st.write('**Input Signal 1**')
-  S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
+  S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_3")
 
   st.write('**Input Signal 2**')
-  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")"""
+  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_4")
 
 
 # Data preparation
