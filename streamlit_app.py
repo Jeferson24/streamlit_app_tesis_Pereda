@@ -233,7 +233,7 @@ with st.expander('Input features',expanded=True):
   st.write('**Input Signal 2**')
   S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_4")
 
-_="""DF_evaluar = load_dataset(S1,S2)
+a="""DF_evaluar = load_dataset(S1,S2)
 #DF_evaluar.to_excel(excel_writer=r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/ARR3_DF_FINAL.xlsx')
 #DF_evaluar.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/ARR3_DF_FINAL.txt', sep=' ', index=False)
 
