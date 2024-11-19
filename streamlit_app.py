@@ -1,4 +1,5 @@
 import streamlit as st
+magicEnabled = false
 
 import matplotlib.pyplot as plt
 import numpy as np
