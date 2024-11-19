@@ -224,7 +224,7 @@ with st.sidebar:
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
 
-model_FDCNN=load_model('model_FCDNN/mi_modelo.h5')
+model_FDCNN=load_model('mi_modelo.h5')
 
 with st.expander('Input features',expanded=True):
   st.write('**Input Signal 1**')
