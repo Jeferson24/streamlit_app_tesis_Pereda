@@ -10,29 +10,32 @@ from sklearn.preprocessing import StandardScaler
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
 
-import tempfile
 import requests
-from tensorflow.keras.models import load_model
+import tempfile
+import os
 
-# URL de Google Drive
-file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'
-url = f"https://drive.google.com/uc?id={file_id}&export=download"
+# Reemplaza con tu ID de archivo de Google Drive
+file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'  # El ID del archivo en Google Drive
+url = f"https://drive.google.com/uc?export=download&id={file_id}"
 
-# Descargar el modelo
+# Descargar el archivo del modelo
 response = requests.get(url)
+
+# Verifica si la descarga fue exitosa (código 200)
 if response.status_code == 200:
-    # Crear un archivo temporal para guardar el modelo
-    with tempfile.NamedTemporaryFile(suffix=".h5", delete=False) as temp_file:
+    # Crear un archivo temporal
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.h5') as temp_file:
         temp_file.write(response.content)
-        temp_file_path = temp_file.name  # Ruta al archivo temporal
-        print(f"Modelo guardado en: {temp_file_path}")
+        temp_file_path = temp_file.name  # Guardar la ruta del archivo temporal
 
     # Cargar el modelo desde el archivo temporal
     model_FCDNN = load_model(temp_file_path)
-    print("Modelo cargado exitosamente.")
+    print("Modelo cargado exitosamente")
+
+    # Elimina el archivo temporal después de cargar el modelo si es necesario
+    os.remove(temp_file_path)
 else:
     print(f"Error al descargar el modelo: {response.status_code}")
-
 
 ###### Funciones######
 from scipy.signal import butter, filtfilt
