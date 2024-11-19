@@ -291,12 +291,13 @@ with st.sidebar:
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
 
-with st.expander('Input features',expanded=True):
-  st.write('**Input Signal 1**')
-  S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_3")
+#with st.expander('Input features',expanded=True):
+  #st.write('**Input Signal 1**')
+  #S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_3")
 
-  st.write('**Input Signal 2**')
-  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_4")
+  #st.write('**Input Signal 2**')
+  #S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_4")
+
 
 # Crear un DataFrame a partir de las variables de entrada
 input_data = {
