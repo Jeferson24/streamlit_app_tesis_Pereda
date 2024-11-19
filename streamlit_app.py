@@ -9,23 +9,30 @@ from sklearn.preprocessing import StandardScaler
 
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
+
+import tempfile
 import requests
-from io import BytesIO
-import tensorflow as tf
 from tensorflow.keras.models import load_model
 
+# URL de Google Drive
 file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'
 url = f"https://drive.google.com/uc?id={file_id}&export=download"
 
+# Descargar el modelo
 response = requests.get(url)
 if response.status_code == 200:
-    model_FCDNN = load_model(str(response.content))
-    print("Modelo cargado exitosamente")
+    # Crear un archivo temporal para guardar el modelo
+    with tempfile.NamedTemporaryFile(suffix=".h5", delete=False) as temp_file:
+        temp_file.write(response.content)
+        temp_file_path = temp_file.name  # Ruta al archivo temporal
+        print(f"Modelo guardado en: {temp_file_path}")
+
+    # Cargar el modelo desde el archivo temporal
+    model_FCDNN = load_model(temp_file_path)
+    print("Modelo cargado exitosamente.")
 else:
     print(f"Error al descargar el modelo: {response.status_code}")
 
-
-from tensorflow.keras.models import load_model
 
 ###### Funciones######
 from scipy.signal import butter, filtfilt
