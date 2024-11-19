@@ -76,7 +76,7 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
 DF_evaluar=pd.DataFrame()
 
 ###### Feature Extraction #######
-def load_dataset(S1,S2):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' | 'U-D'
+def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' | 'U-D'
   if S1 is not None and S2 is not None:
         # Leer los archivos directamente desde el objeto UploadedFile
         df_S1 = pd.read_csv(S1, sep=' ')  # Sótano 1
@@ -199,13 +199,14 @@ def load_dataset(S1,S2):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' | 'U-D'
 
         #APLICACIÓN DE FUNCIÓN DE TRANSFERENCIA (S1/S2)
 
-        df_combined = pd.concat([X_data_S1, X_data_S2], axis=1)
+
+        df_combined = pd.concat([[prop_GM]*(len(X_data_S1)),X_data_S1, X_data_S2], axis=1)
 
         #print(df_transferencia1)
         
         escalador=StandardScaler()
 
-        datos_x = escalador.fit_transform(DF_evaluar)
+        datos_x = escalador.fit_transform(df_combined)
 
         predictions=model_FCDNN.predict(datos_x)
 
@@ -276,6 +277,9 @@ with st.sidebar:
   E_cau_mpa= st.slider('Vertical Elastic Modulus (Mpa)', 1.00, 2.00, 1.44, 0.01) #11
   G_cau_mpa = st.slider('Shear Modulus of Rubber (Mpa)', 0.300, 0.500, 0.392, 0.001) #12
   Fycort_pb_mpa = st.slider('Yield Shear Stress of Lead (Mpa)', 5.00, 10.00, 8.33, 0.01) #13
+  
+ 
+
   st.write('**Input Signal 1**')
   S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
 
@@ -294,8 +298,29 @@ with st.expander('Input features',expanded=True):
   st.write('**Input Signal 2**')
   S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_4")
 
+# Crear un DataFrame a partir de las variables de entrada
+input_data = {
+    'Di_mm': [Di_mm],
+    'Ht_mm': [Ht_mm],
+    'Dl_mm': [Dl_mm],
+    'W_kg': [W_kg],
+    'e_pc_mm': [e_pc_mm],
+    'cc_und': [cc_und],
+    'e_cc_mm': [e_cc_mm],
+    'cs_und': [cs_und],
+    'e_cs_mm': [e_cs_mm],
+    'Fy_ac_mpa': [Fy_ac_mpa],
+    'E_cau_mpa':[E_cau_mpa],
+    'G_cau_mpa':[G_cau_mpa],
+    'Fycort_pb_mpa':[Fycort_pb_mpa]
+}
+
+# Convertir el diccionario a un DataFrame
+df_input = pd.DataFrame(input_data)
+
+
 if S1!=None or S2!=None:
-  DF_evaluar,resultados = load_dataset(S1,S2)
+  DF_evaluar,resultados = load_dataset(S1,S2,df_input)
   
 
   
