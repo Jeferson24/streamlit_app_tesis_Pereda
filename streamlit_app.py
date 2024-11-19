@@ -1,8 +1,5 @@
 import streamlit as st
 
-magicEnabled = False
-
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
