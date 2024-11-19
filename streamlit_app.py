@@ -8,24 +8,8 @@ from tensorflow import keras
 import tsfel
 from sklearn.preprocessing import StandardScaler
 
-import requests
-from io import BytesIO
+
 from tensorflow.keras.models import load_model
-
-# URL del modelo en GitHub (asegúrate de usar el enlace raw)
-url = "https://github.com/Jeferson24/streamlit_app_tesis_Pereda/raw/master/model_FCDN/N/mi_modelo.h5"
-
-# Descargar el archivo del modelo
-response = requests.get(url)
-
-# Verifica si la descarga fue exitosa (código 200)
-if response.status_code == 200:
-    # Cargar el modelo directamente desde la respuesta (BytesIO)
-    model_FCDNN = load_model(BytesIO(response.content))
-    print("Modelo cargado exitosamente")
-else:
-    print("Error al descargar el modelo:", response.status_code)
-
 
 ###### Funciones######
 from scipy.signal import butter, filtfilt
@@ -240,7 +224,7 @@ with st.sidebar:
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
 
-#model_FDCNN=tf.keras.models.load_model("model_FCDNN/mi_modelo.h5")
+model_FDCNN=tf.keras.models.load_model("model_FCDNN/mi_modelo.h5")
 
 with st.expander('Input features',expanded=True):
   st.write('**Input Signal 1**')
