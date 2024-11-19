@@ -317,19 +317,19 @@ with st.sidebar:
 
 # Crear un DataFrame a partir de las variables de entrada
 input_data = {
-    'Di_mm': [Di_mm],
-    'Ht_mm': [Ht_mm],
-    'Dl_mm': [Dl_mm],
-    'W_kg': [W_kg],
-    'e_pc_mm': [e_pc_mm],
-    'cc_und': [cc_und],
-    'e_cc_mm': [e_cc_mm],
-    'cs_und': [cs_und],
-    'e_cs_mm': [e_cs_mm],
-    'Fy_ac_mpa': [Fy_ac_mpa],
-    'E_cau_mpa':[E_cau_mpa],
-    'G_cau_mpa':[G_cau_mpa],
-    'Fycort_pb_mpa':[Fycort_pb_mpa]
+    'Di (mm)': [Di_mm],
+    'Ht (mm)': [Ht_mm],
+    'Dl (mm)': [Dl_mm],
+    'W (kg)': [W_kg],
+    'e_pc (mm)': [e_pc_mm],
+    '#cc': [cc_und],
+    'e_cc (mm)': [e_cc_mm],
+    '#cs': [cs_und],
+    'e_cs (mm)': [e_cs_mm],
+    'Fy_ac (MPa)': [Fy_ac_mpa],
+    'E_cau (MPa)':[E_cau_mpa],
+    'G_cau (MPa)':[G_cau_mpa],
+    'Fycort_pb (MPa)':[Fycort_pb_mpa]
 }
 
 # Convertir el diccionario a un DataFrame
