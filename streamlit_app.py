@@ -19,7 +19,7 @@ url = f"https://drive.google.com/uc?id={file_id}&export=download"
 
 response = requests.get(url)
 if response.status_code == 200:
-    model_FCDNN = load_model(BytesIO(response.content))
+    model_FCDNN = load_model(str(response.content))
     print("Modelo cargado exitosamente")
 else:
     print(f"Error al descargar el modelo: {response.status_code}")
