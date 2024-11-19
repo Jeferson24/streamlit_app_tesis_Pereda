@@ -338,6 +338,7 @@ df_input = pd.DataFrame(input_data)
 
 if S1!=None or S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
+  DF_evaluar.to_csv('dataframe.csv', index=False)
   
 
   
