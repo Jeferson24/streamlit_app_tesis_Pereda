@@ -1,5 +1,8 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+
+magicEnabled = False
+
+#import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
@@ -7,7 +10,7 @@ import tensorflow as tf
 from tensorflow import keras
 import tsfel
 from sklearn.preprocessing import StandardScaler
-magicEnabled = False
+
 
 
 ###### Funciones######
