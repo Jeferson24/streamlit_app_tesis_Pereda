@@ -115,35 +115,35 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
         df_filtered_S2 = df_S2[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
 
 
-        """
-        plt.rcParams['axes.facecolor'] = 'white'
-        plt.plot(df_S1['tiempo(s)'], df_S1['N-S_filtered'], label='Canal N-S',c='darkorange',linewidth=0.5)
-        plt.ylabel('Aceleración (gal)', fontsize=16)
-        plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
-        plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
+       
+        #plt.rcParams['axes.facecolor'] = 'white'
+        #plt.plot(df_S1['tiempo(s)'], df_S1['N-S_filtered'], label='Canal N-S',c='darkorange',linewidth=0.5)
+        #plt.ylabel('Aceleración (gal)', fontsize=16)
+        #plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
+        #plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
         # Get current axis limits
-        x_min, x_max = plt.xlim()
-        y_min, y_max = plt.ylim()
+        #x_min, x_max = plt.xlim()
+        #y_min, y_max = plt.ylim()
         # Expand the limits
-        plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
-        plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
-        plt.legend()
-        plt.show()
+        #plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
+        #plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
+        #plt.legend()
+        #plt.show()
 
 
-        plt.plot(df_S1['tiempo(s)'], df_S1['E-W_filtered'], label='Canal E-W',c='steelblue',linewidth=0.5)
-        plt.ylabel('Aceleración (gal)', fontsize=16)
-        plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
-        plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
+        #plt.plot(df_S1['tiempo(s)'], df_S1['E-W_filtered'], label='Canal E-W',c='steelblue',linewidth=0.5)
+        #plt.ylabel('Aceleración (gal)', fontsize=16)
+        #plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
+        #plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
         # Get current axis limits
-        x_min, x_max = plt.xlim()
-        y_min, y_max = plt.ylim()
+        #x_min, x_max = plt.xlim()
+        #y_min, y_max = plt.ylim()
         # Expand the limits
-        plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
-        plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
-        plt.legend()
-        plt.show()
-        """
+        #plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
+        #plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
+        #plt.legend()
+        #plt.show()
+      
 
         #SEÑAL S1
         acelerometer_Horizontal_1=df_filtered_S1['N-S_filtered'] * 0.7 + df_filtered_S1['E-W_filtered'] * 0.3
@@ -159,22 +159,22 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
         df_filtered_S2["Horizontal"]=acelerometer_Horizontal_2
         df_filtered_S2["Vertical"]=acelerometer_Vertical_2
 
-        """
-        plt.plot(df_S1['tiempo(s)'], df_filtered_S1['Horizontal'], label='Horizontal: N-S (70%) + E-W (30%)',c='maroon',linewidth=0.5)
-        plt.xlabel('Tiempo (s)', fontsize=16)
-        plt.ylabel('Aceleración (gal)', fontsize=16)
-        plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
-        plt.xticks(np.arange(0, 600, 25), fontsize=12)
-        plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
+        
+        #plt.plot(df_S1['tiempo(s)'], df_filtered_S1['Horizontal'], label='Horizontal: N-S (70%) + E-W (30%)',c='maroon',linewidth=0.5)
+        #plt.xlabel('Tiempo (s)', fontsize=16)
+        #plt.ylabel('Aceleración (gal)', fontsize=16)
+        #plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
+        #plt.xticks(np.arange(0, 600, 25), fontsize=12)
+        #plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
         # Get current axis limits
-        x_min, x_max = plt.xlim()
-        y_min, y_max = plt.ylim()
+        #x_min, x_max = plt.xlim()
+        #y_min, y_max = plt.ylim()
         # Expand the limits
-        plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
-        plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
-        plt.legend()
-        plt.show()
-        """
+        #plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
+        #plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
+        #plt.legend()
+        #plt.show()
+        
         #EXTRACCIÓN DE FEATURE POR CADA SEÑAL
 
         #FEATURES S1
