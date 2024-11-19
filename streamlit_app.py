@@ -11,6 +11,27 @@ import tsfel
 from sklearn.preprocessing import StandardScaler
 
 
+#https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
+import requests
+from io import BytesIO
+import tensorflow as tf
+from tensorflow.keras.models import load_model
+
+# Reemplaza con tu ID de archivo de Google Drive
+file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'  # El ID del archivo en Google Drive
+url = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+# Descargar el archivo del modelo
+response = requests.get(url)
+
+# Verifica si la descarga fue exitosa (código 200)
+if response.status_code == 200:
+    # Cargar el modelo directamente desde los bytes descargados
+    model_FCDNN= load_model(BytesIO(response.content))
+    print("Modelo cargado exitosamente")
+else:
+    print(f"Error al descargar el modelo: {response.status_code}")
+
 from tensorflow.keras.models import load_model
 
 ###### Funciones######
@@ -240,7 +261,7 @@ escalador=StandardScaler()
 
 datos_x = escalador.fit_transform(DF_evaluar)
 
-predictions=model_FDCNN.predict(datos_x)
+predictions=model_FCDNN.predict(datos_x)
 
 # Convert predictions to class labels
 predicted_labels = np.argmax(predictions, axis=1)
