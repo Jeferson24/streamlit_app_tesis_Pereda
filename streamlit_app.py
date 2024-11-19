@@ -216,19 +216,19 @@ with st.expander('Mechanical Propierties of LRB Materials',expanded=True):
 with st.sidebar:
   st.header('Input LRB propierties (Geometrical and mechanical)')
   #Input propierties
-  Di_mm = st.slider('LRB Diameter (mm)', 749.3, 952.5, 850.9,0.01) #1
+  Di_mm = st.slider('LRB Diameter (mm)', 749.30, 952.50, 850.90,0.01) #1
   Ht_mm = st.slider('LRB High (mm)', 407.64, 420.34, 410.00,0.01) #2
-  Dl_mm = st.slider('Lead Core Diameter (mm)', 114.3, 203.2, 165.1,0.01) #3
-  W_kg = st.slider('LRB Weight (kg)', 808, 1456, 1068,1) #4
-  e_pc_mm = st.slider('Thickness of Exterior Rubber Layer (mm)', 18, 20, 19,1) #5
-  cc_und = st.slider('Number Rubber Layers', 10, 30, 28,1) #6
-  e_cc_mm = st.slider('Thickness of Interior Rubber Layers (mm)', 5, 8, 10,1) #7
-  cs_und = st.slider('Number Steel Layers', 10, 30, 27,1) #8
-  e_cs_mm= st.slider('Thickness of Interior Steel Layers (mm)', 2.00, 4.00, 3.04,0.01) #9
-  Fy_ac_mpa=st.slider('Yield Strees Steel (Mpa)', 165, 345, 250,1) #10
-  E_cau_mpa= st.slider('Vertical Elastic Modulus (Mpa)', 1.00, 2.00, 1.44,0.01) #11
-  G_cau_mpa = st.slider('Shear Modulus of Rubber (Mpa)', 0.300, 0.500, 0.392,0.001) #12
-  Fycort_pb_mpa = st.slider('Yield Shear Stress of Lead (Mpa)', 5.00, 10.00, 8.33,0.01) #13
+  Dl_mm = st.slider('Lead Core Diameter (mm)', 114.30, 203.20, 165.10,0.01) #3
+  W_kg = st.slider('LRB Weight (kg)', 808, 1456, 1068, 1) #4
+  e_pc_mm = st.slider('Thickness of Exterior Rubber Layer (mm)', 18, 20, 19, 1) #5
+  cc_und = st.slider('Number Rubber Layers', 10, 30, 28, 1) #6
+  e_cc_mm = st.slider('Thickness of Interior Rubber Layers (mm)', 5, 8, 10, 1) #7
+  cs_und = st.slider('Number Steel Layers', 10, 30, 27, 1) #8
+  e_cs_mm= st.slider('Thickness of Interior Steel Layers (mm)', 2.00, 4.00, 3.04, 0.01) #9
+  Fy_ac_mpa=st.slider('Yield Strees Steel (Mpa)', 165, 345, 250, 1) #10
+  E_cau_mpa= st.slider('Vertical Elastic Modulus (Mpa)', 1.00, 2.00, 1.44, 0.01) #11
+  G_cau_mpa = st.slider('Shear Modulus of Rubber (Mpa)', 0.300, 0.500, 0.392, 0.001) #12
+  Fycort_pb_mpa = st.slider('Yield Shear Stress of Lead (Mpa)', 5.00, 10.00, 8.33, 0.01) #13
   st.write('**Input Signal 1**')
   S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
 
