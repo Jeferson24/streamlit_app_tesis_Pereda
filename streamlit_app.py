@@ -77,132 +77,138 @@ DF_evaluar=pd.DataFrame()
 
 ###### Feature Extraction #######
 def load_dataset(S1,S2):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' | 'U-D'
-  #Lectura para el Aislador A1
-  df_S1= pd.read_csv((S1),sep=' ') #Sótano 1
-  df_S2= pd.read_csv((S2),sep=' ') #Sótano 2
-  df_S1 = df_S1.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
-  df_S2 = df_S2.loc[:, ~df_S2.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
+  if S1 is not None and S2 is not None:
+        # Leer los archivos directamente desde el objeto UploadedFile
+        df_S1 = pd.read_csv(S1, sep=' ')  # Sótano 1
+        df_S2 = pd.read_csv(S2, sep=' ')  # Sótano 2
+        df_S1 = df_S1.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
+        df_S2 = df_S2.loc[:, ~df_S2.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
 
-  #APLICACIÓN DEL BAND PASS FILTER A LA SEÑAL
-  fs = 100  # Sample rate
+      #APLICACIÓN DEL BAND PASS FILTER A LA SEÑAL
+        fs = 100  # Sample rate
 
-  #Bandpass filter
-  lowcut=0.25
-  highcut=20
+        #Bandpass filter
+        lowcut=0.25
+        highcut=20
 
-  # Crear la lista de tiempo con un paso de 0.01s
-  time=np.arange(0,len(df_S1))/fs
-  time=[round(tiempo, 2) for tiempo in time]
+        # Crear la lista de tiempo con un paso de 0.01s
+        time=np.arange(0,len(df_S1))/fs
+        time=[round(tiempo, 2) for tiempo in time]
 
-  #Constantes de conversión V a gal (0.01 m/s^2)
-  P=float(1/8)
-  U=float(1/8)
-  S=float(1/2)
+        #Constantes de conversión V a gal (0.01 m/s^2)
+        P=float(1/8)
+        U=float(1/8)
+        S=float(1/2)
 
-  #Aplicación de la conversión
-  df_S1["tiempo(s)"] = time
-  df_S1['N-S_filtered'] = butter_bandpass_filter(df_S1['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
-  df_S1['E-W_filtered'] = butter_bandpass_filter(df_S1['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
-  df_S1['U-D_filtered'] = butter_bandpass_filter(df_S1['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
+        #Aplicación de la conversión
+        df_S1["tiempo(s)"] = time
+        df_S1['N-S_filtered'] = butter_bandpass_filter(df_S1['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
+        df_S1['E-W_filtered'] = butter_bandpass_filter(df_S1['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
+        df_S1['U-D_filtered'] = butter_bandpass_filter(df_S1['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
 
-  df_S2["tiempo(s)"] = time
-  df_S2['N-S_filtered'] = butter_bandpass_filter(df_S2['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
-  df_S2['E-W_filtered'] = butter_bandpass_filter(df_S2['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
-  df_S2['U-D_filtered'] = butter_bandpass_filter(df_S2['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
+        df_S2["tiempo(s)"] = time
+        df_S2['N-S_filtered'] = butter_bandpass_filter(df_S2['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
+        df_S2['E-W_filtered'] = butter_bandpass_filter(df_S2['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
+        df_S2['U-D_filtered'] = butter_bandpass_filter(df_S2['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
 
-  df_filtered_S1 = df_S1[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
-  df_filtered_S2 = df_S2[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
-
-
-  """
-  plt.rcParams['axes.facecolor'] = 'white'
-  plt.plot(df_S1['tiempo(s)'], df_S1['N-S_filtered'], label='Canal N-S',c='darkorange',linewidth=0.5)
-  plt.ylabel('Aceleración (gal)', fontsize=16)
-  plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
-  plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
-  # Get current axis limits
-  x_min, x_max = plt.xlim()
-  y_min, y_max = plt.ylim()
-  # Expand the limits
-  plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
-  plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
-  plt.legend()
-  plt.show()
+        df_filtered_S1 = df_S1[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
+        df_filtered_S2 = df_S2[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
 
 
-  plt.plot(df_S1['tiempo(s)'], df_S1['E-W_filtered'], label='Canal E-W',c='steelblue',linewidth=0.5)
-  plt.ylabel('Aceleración (gal)', fontsize=16)
-  plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
-  plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
-  # Get current axis limits
-  x_min, x_max = plt.xlim()
-  y_min, y_max = plt.ylim()
-  # Expand the limits
-  plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
-  plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
-  plt.legend()
-  plt.show()
-  """
+        """
+        plt.rcParams['axes.facecolor'] = 'white'
+        plt.plot(df_S1['tiempo(s)'], df_S1['N-S_filtered'], label='Canal N-S',c='darkorange',linewidth=0.5)
+        plt.ylabel('Aceleración (gal)', fontsize=16)
+        plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
+        plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
+        # Get current axis limits
+        x_min, x_max = plt.xlim()
+        y_min, y_max = plt.ylim()
+        # Expand the limits
+        plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
+        plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
+        plt.legend()
+        plt.show()
 
-  #SEÑAL S1
-  acelerometer_Horizontal_1=df_filtered_S1['N-S_filtered'] * 0.7 + df_filtered_S1['E-W_filtered'] * 0.3
-  acelerometer_Vertical_1=df_filtered_S1['U-D_filtered']
-  #Añadiendo columnas a la señal S1
-  df_filtered_S1["Horizontal"]=acelerometer_Horizontal_1
-  df_filtered_S1["Vertical"]=acelerometer_Vertical_1
 
-  #SEÑAL S2
-  acelerometer_Horizontal_2=df_filtered_S2['N-S_filtered'] * 0.7 + df_filtered_S2['E-W_filtered'] * 0.3
-  acelerometer_Vertical_2=df_filtered_S2['U-D_filtered']
-  #Añadiendo columnas a la señal S2
-  df_filtered_S2["Horizontal"]=acelerometer_Horizontal_2
-  df_filtered_S2["Vertical"]=acelerometer_Vertical_2
+        plt.plot(df_S1['tiempo(s)'], df_S1['E-W_filtered'], label='Canal E-W',c='steelblue',linewidth=0.5)
+        plt.ylabel('Aceleración (gal)', fontsize=16)
+        plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
+        plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
+        # Get current axis limits
+        x_min, x_max = plt.xlim()
+        y_min, y_max = plt.ylim()
+        # Expand the limits
+        plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
+        plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
+        plt.legend()
+        plt.show()
+        """
 
-  """
-  plt.plot(df_S1['tiempo(s)'], df_filtered_S1['Horizontal'], label='Horizontal: N-S (70%) + E-W (30%)',c='maroon',linewidth=0.5)
-  plt.xlabel('Tiempo (s)', fontsize=16)
-  plt.ylabel('Aceleración (gal)', fontsize=16)
-  plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
-  plt.xticks(np.arange(0, 600, 25), fontsize=12)
-  plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
-  # Get current axis limits
-  x_min, x_max = plt.xlim()
-  y_min, y_max = plt.ylim()
-  # Expand the limits
-  plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
-  plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
-  plt.legend()
-  plt.show()
-  """
-  #EXTRACCIÓN DE FEATURE POR CADA SEÑAL
+        #SEÑAL S1
+        acelerometer_Horizontal_1=df_filtered_S1['N-S_filtered'] * 0.7 + df_filtered_S1['E-W_filtered'] * 0.3
+        acelerometer_Vertical_1=df_filtered_S1['U-D_filtered']
+        #Añadiendo columnas a la señal S1
+        df_filtered_S1["Horizontal"]=acelerometer_Horizontal_1
+        df_filtered_S1["Vertical"]=acelerometer_Vertical_1
 
-  #FEATURES S1
-  acel_horiz_S1=df_filtered_S1["Horizontal"]
-  acel_vert_S1=df_filtered_S1["Vertical"]
-  cfg_file = tsfel.get_features_by_domain()
+        #SEÑAL S2
+        acelerometer_Horizontal_2=df_filtered_S2['N-S_filtered'] * 0.7 + df_filtered_S2['E-W_filtered'] * 0.3
+        acelerometer_Vertical_2=df_filtered_S2['U-D_filtered']
+        #Añadiendo columnas a la señal S2
+        df_filtered_S2["Horizontal"]=acelerometer_Horizontal_2
+        df_filtered_S2["Vertical"]=acelerometer_Vertical_2
 
-  #Feature Extraction de señal Horizontal S1
-  X_data_S1 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S1, fs=100, window_size=1000,overlap=0.1)
-  #X_data_S1.to_excel(excel_writer=(r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S1_H.xlsx'))
-  #X_data_S1.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S1_H.txt', sep=' ', index=False)
+        """
+        plt.plot(df_S1['tiempo(s)'], df_filtered_S1['Horizontal'], label='Horizontal: N-S (70%) + E-W (30%)',c='maroon',linewidth=0.5)
+        plt.xlabel('Tiempo (s)', fontsize=16)
+        plt.ylabel('Aceleración (gal)', fontsize=16)
+        plt.grid(True, linestyle='-', linewidth=0.5, color='gray')
+        plt.xticks(np.arange(0, 600, 25), fontsize=12)
+        plt.yticks(np.arange(-0.001, 0.0013, 0.0005), fontsize=12)
+        # Get current axis limits
+        x_min, x_max = plt.xlim()
+        y_min, y_max = plt.ylim()
+        # Expand the limits
+        plt.xlim(0 , 200)  # Expand x-axis by 10 units on both sides
+        plt.ylim(y_min, y_max)  # Expand y-axis by 50 units on both sides
+        plt.legend()
+        plt.show()
+        """
+        #EXTRACCIÓN DE FEATURE POR CADA SEÑAL
 
-  #FEATURES S2
-  acel_horiz_S2=df_filtered_S2["Horizontal"]
-  acel_vert_S2=df_filtered_S2["Vertical"]
+        #FEATURES S1
+        acel_horiz_S1=df_filtered_S1["Horizontal"]
+        acel_vert_S1=df_filtered_S1["Vertical"]
+        cfg_file = tsfel.get_features_by_domain()
 
-  #Feature Extraction de señal Horizontal S2
-  X_data_S2 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S2, fs=100, window_size=1000,overlap=0.1)
-  X_data_S2.columns = ['1' + col[1:] for col in X_data_S2]
-  #X_data_S2.to_excel(excel_writer=(r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S2_H.xlsx'))
-  #X_data_S2.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S2_H.txt', sep=' ', index=False)
+        #Feature Extraction de señal Horizontal S1
+        X_data_S1 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S1, fs=100, window_size=1000,overlap=0.1)
+        #X_data_S1.to_excel(excel_writer=(r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S1_H.xlsx'))
+        #X_data_S1.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S1_H.txt', sep=' ', index=False)
 
-  #APLICACIÓN DE FUNCIÓN DE TRANSFERENCIA (S1/S2)
+        #FEATURES S2
+        acel_horiz_S2=df_filtered_S2["Horizontal"]
+        acel_vert_S2=df_filtered_S2["Vertical"]
 
-  df_combined = pd.concat([X_data_S1, X_data_S2], axis=1)
+        #Feature Extraction de señal Horizontal S2
+        X_data_S2 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S2, fs=100, window_size=1000,overlap=0.1)
+        X_data_S2.columns = ['1' + col[1:] for col in X_data_S2]
+        #X_data_S2.to_excel(excel_writer=(r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S2_H.xlsx'))
+        #X_data_S2.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S2_H.txt', sep=' ', index=False)
 
-  #print(df_transferencia1)
+        #APLICACIÓN DE FUNCIÓN DE TRANSFERENCIA (S1/S2)
 
-  return df_combined
+        df_combined = pd.concat([X_data_S1, X_data_S2], axis=1)
+
+        #print(df_transferencia1)
+
+        return df_combined  # Asegúrate de que esta variable esté definida en tu lógica
+  else:
+        st.error("Por favor, sube ambos archivos de señal.")
+        return None
+
+  
 
 st.set_page_config(page_title=None, page_icon=None, layout="centered", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
