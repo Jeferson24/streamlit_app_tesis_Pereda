@@ -223,7 +223,7 @@ with st.sidebar:
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
 
-model_FDCNN=tf.keras.models.load_model("https://github.com/Jeferson24/streamlit_app_tesis_Pereda/blob/master/model_FCDNN/mi_modelo.h5")
+model_FDCNN=tf.keras.models.load_model("https://github.com/Jeferson24/streamlit_app_tesis_Pereda/raw/refs/heads/master/model_FCDNN/mi_modelo.h5")
 
 with st.expander('Input features',expanded=True):
   st.write('**Input Signal 1**')
