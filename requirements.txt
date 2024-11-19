@@ -8,3 +8,4 @@ scikit-learn
 scipy
 glob2
 zipfile36
+request
