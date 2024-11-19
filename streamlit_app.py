@@ -224,8 +224,6 @@ with st.sidebar:
   #'#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)'
   # Create a DataFrame for the input features
 
-model_FDCNN=load_model('mi_modelo.h5')
-
 with st.expander('Input features',expanded=True):
   st.write('**Input Signal 1**')
   S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_3")
@@ -233,7 +231,7 @@ with st.expander('Input features',expanded=True):
   st.write('**Input Signal 2**')
   S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_4")
 
-DF_evaluar = load_dataset(S1,S2)
+"""DF_evaluar = load_dataset(S1,S2)
 #DF_evaluar.to_excel(excel_writer=r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/ARR3_DF_FINAL.xlsx')
 #DF_evaluar.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/ARR3_DF_FINAL.txt', sep=' ', index=False)
 
@@ -270,7 +268,7 @@ nivel_segundo_mayor=resultados.index(segundo_nivel)+1
 with st.expander('Result of Inspection',expanded=True):
   #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
   st.write('Level of Deterioration '+str(nivel_mayor))
-
+"""
 # Data preparation
 # Encode X
 #encode = ['island', 'sex']
