@@ -13,6 +13,7 @@ from tensorflow.keras.models import load_model
 import requests
 import tempfile
 import os
+import joblib
 
 # Reemplaza con tu ID de archivo de Google Drive
 file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'  # El ID del archivo en Google Drive
@@ -36,6 +37,30 @@ if response.status_code == 200:
     os.remove(temp_file_path)
 else:
     print(f"Error al descargar el modelo: {response.status_code}")
+
+# Reemplaza con tu ID de archivo de Google Drive
+file_id2 = '1NKATMIPUo3ohX4VIW9WWF27a1GIXcjpI'  # El ID del archivo en Google Drive
+url2 = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+# Descargar el archivo del modelo
+response = requests.get(url2)
+
+# Verifica si la descarga fue exitosa (código 200)
+if response.status_code == 200:
+    # Crear un archivo temporal
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.pkl') as temp_file2:
+        temp_file2.write(response.content)
+        temp_file_path2 = temp_file2.name  # Guardar la ruta del archivo temporal
+
+    # Cargar el modelo desde el archivo temporal
+    escalador= load_model(temp_file_path2)
+    print("Escalador cargado exitosamente")
+
+    # Elimina el archivo temporal después de cargar el modelo si es necesario
+    os.remove(temp_file_path2)
+else:
+    print(f"Error al descargar el modelo: {response.status_code}")
+
 
 ###### Funciones######
 from scipy.signal import butter, filtfilt
