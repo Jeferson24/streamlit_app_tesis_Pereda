@@ -215,7 +215,7 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
 
         df_new=df_combined[['Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)','#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)','S1_Median frequency', 'S1_Positive turning points', 'S1_Zero crossing rate','S1_Fundamental frequency',
                   'S1_Spectral roll-on','S1_Neighbourhood peaks','S1_Spectral positive turning points','S1_Power bandwidth','S1_Maximum frequency','S1_Max power spectrum','S2_Median frequency', 'S2_Positive turning points', 'S2_Zero crossing rate','S2_Fundamental frequency',
-                  'S2_Spectral roll-on','S2_Neighbourhood peaks','S2_Spectral positive turning points','S2_Power bandwidth','S2_Maximum frequency','S2_Max power spectrum','Nivel_Dano']]
+                  'S2_Spectral roll-on','S2_Neighbourhood peaks','S2_Spectral positive turning points','S2_Power bandwidth','S2_Maximum frequency','S2_Max power spectrum']]
         df_new
 
         #print(df_transferencia1)
