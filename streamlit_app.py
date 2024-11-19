@@ -246,7 +246,7 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
         nivel_final=max(resultados)/total*100
         segundo_nivel=sorted(resultados)[-2]/total*100
         nivel_mayor=resultados.index(max(resultados))+1
-        nivel_segundo_mayor=resultados.index(segundo_nivel)+1
+        nivel_segundo_mayor=resultados.index(sorted(resultados)[-2])+1
         with st.expander('Result of Inspection',expanded=True):
         #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
           st.write('Level of Deterioration '+str(nivel_mayor))
