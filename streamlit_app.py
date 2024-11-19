@@ -6,7 +6,7 @@ import tensorflow as tf
 from tensorflow import keras
 import tsfel
 from sklearn.preprocessing import StandardScaler
-
+from tensorflow.keras.models import load_model
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
 
