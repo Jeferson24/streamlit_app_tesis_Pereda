@@ -40,7 +40,7 @@ else:
 
 # Reemplaza con tu ID de archivo de Google Drive
 file_id2 = '1NKATMIPUo3ohX4VIW9WWF27a1GIXcjpI'  # El ID del archivo en Google Drive
-url2 = f"https://drive.google.com/uc?export=download&id={file_id}"
+url2 = f"https://drive.google.com/uc?export=download&id={file_id2}"
 
 # Descargar el archivo del modelo
 response = requests.get(url2)
