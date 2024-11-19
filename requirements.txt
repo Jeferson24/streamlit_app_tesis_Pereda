@@ -2,3 +2,6 @@ streamlit
 numpy
 pandas
 scikit-learn
+tensorflow
+tsfel
+matplotlib
