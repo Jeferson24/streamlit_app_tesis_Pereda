@@ -272,7 +272,8 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
         nivel_segundo_mayor=resultados.index(sorted(resultados)[-2])+1
         with st.expander('Result of Inspection',expanded=True):
         #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-          st.write('Level of Deterioration '+str(nivel_mayor))
+          st.write('Level of Deterioration '+str(nivel_mayor)+'-> Probabilidad: '+str(nivel_final))
+          st.write('Second Level of Deterioration '+str(nivel_segundo_mayor)+'-> Probabilidad: '+str(segundo_nivel))
 
         return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
   else:
