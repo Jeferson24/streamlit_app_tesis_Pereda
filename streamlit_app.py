@@ -53,7 +53,7 @@ if response.status_code == 200:
         temp_file_path2 = temp_file2.name  # Guardar la ruta del archivo temporal
 
     # Cargar el modelo desde el archivo temporal
-    escalador= load_model(temp_file_path2)
+    escalador= joblib.load(temp_file_path2)
     print("Escalador cargado exitosamente")
 
     # Elimina el archivo temporal después de cargar el modelo si es necesario
@@ -244,12 +244,10 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
         df_new
 
         #print(df_transferencia1)
-        
-        escalador=StandardScaler()
 
-        datos_x = escalador.fit_transform(df_new)
+        X_evaluate = escalador.transform(df_new)
 
-        predictions=model_FCDNN.predict(datos_x)
+        predictions=model_FCDNN.predict(X_evaluate)
 
         # Convert predictions to class labels
         predicted_labels = np.argmax(predictions, axis=1)
