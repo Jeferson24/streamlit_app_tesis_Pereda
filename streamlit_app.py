@@ -199,14 +199,30 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
 
         #APLICACIÓN DE FUNCIÓN DE TRANSFERENCIA (S1/S2)
 
+        prop_GM= pd.concat([prop_GM] * (len(X_data_S1)), ignore_index=True)
 
-        df_combined = pd.concat([[prop_GM]*(len(X_data_S1)),X_data_S1, X_data_S2], axis=1)
+        df_combined = pd.concat([prop_GM,X_data_S1, X_data_S2], axis=1)
+
+        def rename_columns(column_name):
+            if column_name.startswith("0_"):
+                return column_name.replace("0_", "S1_")
+            elif column_name.startswith("1_"):
+                return column_name.replace("1_", "S2_")
+            else:
+                return column_name
+
+        df_combined.columns = [rename_columns(col) for col in df_combined.columns]
+
+        df_new=df_combined[['Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)','#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)','S1_Median frequency', 'S1_Positive turning points', 'S1_Zero crossing rate','S1_Fundamental frequency',
+                  'S1_Spectral roll-on','S1_Neighbourhood peaks','S1_Spectral positive turning points','S1_Power bandwidth','S1_Maximum frequency','S1_Max power spectrum','S2_Median frequency', 'S2_Positive turning points', 'S2_Zero crossing rate','S2_Fundamental frequency',
+                  'S2_Spectral roll-on','S2_Neighbourhood peaks','S2_Spectral positive turning points','S2_Power bandwidth','S2_Maximum frequency','S2_Max power spectrum','Nivel_Dano']]
+        df_new
 
         #print(df_transferencia1)
         
         escalador=StandardScaler()
 
-        datos_x = escalador.fit_transform(df_combined)
+        datos_x = escalador.fit_transform(df_new)
 
         predictions=model_FCDNN.predict(datos_x)
 
