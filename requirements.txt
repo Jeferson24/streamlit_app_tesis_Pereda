@@ -9,3 +9,4 @@ scipy
 glob2
 zipfile36
 requests
+joblib
