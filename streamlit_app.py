@@ -14,20 +14,16 @@ from io import BytesIO
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 
-# Reemplaza con tu ID de archivo de Google Drive
-file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'  # El ID del archivo en Google Drive
-url = f"https://drive.google.com/uc?export=download&id={file_id}"
+file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'
+url = f"https://drive.google.com/uc?id={file_id}&export=download"
 
-# Descargar el archivo del modelo
 response = requests.get(url)
-
-# Verifica si la descarga fue exitosa (código 200)
 if response.status_code == 200:
-    # Cargar el modelo directamente desde los bytes descargados
-    model_FCDNN= load_model(BytesIO(response.content))
+    model_FCDNN = load_model(BytesIO(response.content))
     print("Modelo cargado exitosamente")
 else:
     print(f"Error al descargar el modelo: {response.status_code}")
+
 
 from tensorflow.keras.models import load_model
 
