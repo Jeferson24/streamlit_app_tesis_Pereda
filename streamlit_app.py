@@ -263,40 +263,41 @@ with st.expander('Input features',expanded=True):
   st.write('**Input Signal 2**')
   S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_4")
 
+if S1!=None & S2!=None:
+  DF_evaluar = load_dataset(S1,S2)
 
-DF_evaluar = load_dataset(S1,S2)
+  escalador=StandardScaler()
 
-escalador=StandardScaler()
+  datos_x = escalador.fit_transform(DF_evaluar)
 
-datos_x = escalador.fit_transform(DF_evaluar)
+  predictions=model_FCDNN.predict(datos_x)
 
-predictions=model_FCDNN.predict(datos_x)
+  # Convert predictions to class labels
+  predicted_labels = np.argmax(predictions, axis=1)
 
-# Convert predictions to class labels
-predicted_labels = np.argmax(predictions, axis=1)
+  total=len(predicted_labels)
+  nivel_1=0
+  nivel_2=0
+  nivel_3=0
 
-total=len(predicted_labels)
-nivel_1=0
-nivel_2=0
-nivel_3=0
+  for i in range(total):
+    if predicted_labels[i] == 0:
+        nivel_1+=1
+    elif predicted_labels[i]==1:
+        nivel_2+=1
+    elif predicted_labels[i]==2:
+        nivel_3+=1
 
-for i in range(total):
-  if predicted_labels[i] == 0:
-      nivel_1+=1
-  elif predicted_labels[i]==1:
-      nivel_2+=1
-  elif predicted_labels[i]==2:
-      nivel_3+=1
+  resultados=[nivel_1,nivel_2,nivel_3]
+  nivel_final=max(resultados)/total*100
+  segundo_nivel=sorted(resultados)[-2]/total*100
 
-resultados=[nivel_1,nivel_2,nivel_3]
-nivel_final=max(resultados)/total*100
-segundo_nivel=sorted(resultados)[-2]/total*100
-
-nivel_mayor=resultados.index(max(resultados))+1
-nivel_segundo_mayor=resultados.index(segundo_nivel)+1
+  nivel_mayor=resultados.index(max(resultados))+1
+  nivel_segundo_mayor=resultados.index(segundo_nivel)+1
 
 
-with st.expander('Result of Inspection',expanded=True):
-  #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-  st.write('Level of Deterioration '+str(nivel_mayor))
+  with st.expander('Result of Inspection',expanded=True):
+    #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+    st.write('Level of Deterioration '+str(nivel_mayor))
+
 
