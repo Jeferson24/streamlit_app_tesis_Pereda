@@ -287,19 +287,6 @@ st.title('Non-invasive semi-automatic inspection system for lead rubber bearings
 
 st.info('This is app predict the level of damage of lead rubber bearings')
 
-with st.expander('Geometric characteristics of LRB',expanded=True):
-  st.write('**Raw data**')
-  #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
-  #df
-  
-  st.write('**X**')
-
-  st.write('**y**')
-
-with st.expander('Mechanical Propierties of LRB Materials',expanded=True):
-  #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-  st.write('**X**')
-
 # Input features
 with st.sidebar:
   st.header('Input LRB propierties (Geometrical and mechanical)')
@@ -318,7 +305,6 @@ with st.sidebar:
   G_cau_mpa = st.slider('Shear Modulus of Rubber (Mpa)', 0.300, 0.500, 0.392, 0.001) #12
   Fycort_pb_mpa = st.slider('Yield Shear Stress of Lead (Mpa)', 5.00, 10.00, 8.33, 0.01) #13
   
- 
 
   st.write('**Input Signal 1**')
   S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
@@ -359,7 +345,36 @@ input_data = {
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
 
+from PIL import Image
+import requests
+from io import BytesIO
 
+# Reemplaza con tu ID de archivo de Google Drive
+image_file_id = '1vp8Miwsz4P3BfqOHP2SyUgo3pZssN1M8'  # Cambia este ID por el de tu imagen en Google Drive
+image_url = f"https://drive.google.com/uc?export=download&id={image_file_id}"
+
+# Descargar la imagen
+response = requests.get(image_url)
+
+if response.status_code == 200:
+    image = Image.open(BytesIO(response.content))
+else:
+    st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+
+with st.expander('Geometric characteristics of LRB',expanded=True):
+  #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
+  #df
+  st.image(image, caption="Geometric Characteristics of LRB")
+  # Mostrar los datos de ingreso en una tabla
+  st.write("**Tabla de Propiedades Geométricas de Entrada**")
+  st.table(df_input['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs'])
+
+with st.expander('Mechanical Propierties of LRB Materials',expanded=True):
+  #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+   # Mostrar los datos de ingreso en una tabla
+  st.write("**Tabla de Propiedades Mecánicas de Entrada**")
+  st.table(df_input['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'])
+  
 if S1!=None or S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
   DF_evaluar.to_csv('dataframe.csv', index=False)
