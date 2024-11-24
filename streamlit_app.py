@@ -345,9 +345,7 @@ input_data = {
 
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
-st.write("Columnas disponibles:", df_input.columns.tolist())
-print(df_input)
-
+st.table(df_input)
 from PIL import Image
 import requests
 from io import BytesIO
