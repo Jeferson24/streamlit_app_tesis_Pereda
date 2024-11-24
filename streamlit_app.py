@@ -342,8 +342,10 @@ input_data = {
     'Fycort_pb (MPa)':[Fycort_pb_mpa]
 }
 
+
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
+st.write("Columnas disponibles:", df_input.columns.tolist())
 print(df_input)
 
 from PIL import Image
