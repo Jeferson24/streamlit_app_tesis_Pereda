@@ -345,10 +345,8 @@ input_data = {
 
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
-df_input = df_input.reset_index(drop=True)
 
-if 'Unnamed: 0' in df_input.columns:  # Cambia 'Unnamed: 0' por el nombre de la columna que se genera automáticamente.
-    df_input = df_input.drop(columns=['Unnamed: 0'])
+df_input = df_input.drop(columns=['index'])
 st.dataframe(df_input)
 
 from PIL import Image
