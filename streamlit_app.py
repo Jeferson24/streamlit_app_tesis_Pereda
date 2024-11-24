@@ -345,7 +345,7 @@ input_data = {
 
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
-st.table(df_input)
+df_input = df_input.reset_index(drop=True)
 from PIL import Image
 import requests
 from io import BytesIO
@@ -368,13 +368,13 @@ with st.expander('Geometric characteristics of LRB',expanded=True):
   st.image(image, caption="Geometric Characteristics of LRB")
   # Mostrar los datos de ingreso en una tabla
   st.write("**Tabla de Propiedades Geométricas de Entrada**")
-  st.table(df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1))
+  st.dataframe(df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1))
 
 with st.expander('Mechanical Propierties of LRB Materials',expanded=True):
   #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
    # Mostrar los datos de ingreso en una tabla
   st.write("**Tabla de Propiedades Mecánicas de Entrada**")
-  st.table(df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs'],axis=1))
+  st.dataframe(df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1))
   
 if S1!=None or S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
