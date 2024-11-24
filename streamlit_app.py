@@ -346,9 +346,6 @@ input_data = {
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
 
-df_input = df_input.drop(columns=['index'])
-st.dataframe(df_input)
-
 from PIL import Image
 import requests
 from io import BytesIO
