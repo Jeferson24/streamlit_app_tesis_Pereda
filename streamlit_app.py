@@ -344,6 +344,7 @@ input_data = {
 
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
+print(df_input)
 
 from PIL import Image
 import requests
