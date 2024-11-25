@@ -10,6 +10,22 @@ from tensorflow.keras.models import load_model
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
 
+st.markdown(
+    """
+    <style>
+    .st-expander > div > div > div {
+        font-size: 24px;  /* Cambia el tamaño del texto del título */
+        font-weight: bold;  /* Aplica negrita */
+        color: #FF5733;  /* Cambia el color del título (naranja en este caso) */
+        background-color: #F5F5F5;  /* Cambia el color de fondo del título */
+        padding: 10px;  /* Agrega un relleno alrededor del título */
+        border-radius: 5px;  /* Bordes redondeados */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 import requests
 import tempfile
 import os
