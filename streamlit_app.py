@@ -39,6 +39,27 @@ Estudio: CITA ESTUDIO
         ''')
 
 
+#Pagina config
+page_config="""
+    <style>
+        /* Reducir márgenes de la página */
+        .reportview-container {
+            margin: 0;
+            padding: 0;
+        }
+        .main {
+            padding: 0;
+        }
+        .block-container {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    </style>
+"""
+st.markdown(page_config, unsafe_allow_html=True)
+
 # Pie de página con créditos
 footer = """
 <style>
