@@ -2,8 +2,16 @@ import requests
 import tempfile
 import os
 import joblib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+from tensorflow import keras
+import tsfel
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.models import load_model
+
 import streamlit as st
-#https://drive.google.com/file/d/1nKWFplIxkb7ecKXhBJP9VdOeIjl7cTHb/view?usp=sharing
 
 # Reemplaza con tu ID de archivo de Google Drive
 favicon_file_id = '1nKWFplIxkb7ecKXhBJP9VdOeIjl7cTHb'  # Cambia este ID por el de tu imagen en Google Drive
@@ -45,15 +53,6 @@ footer = """
 """
 st.markdown(footer, unsafe_allow_html=True)
 
-
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import tensorflow as tf
-from tensorflow import keras
-import tsfel
-from sklearn.preprocessing import StandardScaler
-from tensorflow.keras.models import load_model
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
 
