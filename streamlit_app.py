@@ -157,12 +157,8 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
 DF_evaluar=pd.DataFrame()
 
 ###### FEATURE EXTRACTION #######
-def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E-W' | 'U-D'
-    # Leer los archivos directamente desde el objeto UploadedFile
-    df_S1 = pd.read_csv(S1, sep=' ')  # Sótano 1
-    df_S2 = pd.read_csv(S2, sep=' ')  # Sótano 2
-    df_S1 = df_S1.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
-    df_S2 = df_S2.loc[:, ~df_S2.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
+def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E-W' | 'U-D'
+   
 
     #APLICACIÓN DEL BAND PASS FILTER A LA SEÑAL
     fs = 100  # Sample rate
@@ -332,7 +328,7 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E
            'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
            'Probability':[nivel_final, segundo_nivel]
         }
-        st.dataframe(result,num_rows='dynamic')
+        st.dataframe(result,hide_index=True)
         # CSS para colorear columnas
         st.markdown(
                 """
@@ -569,9 +565,10 @@ with st.expander("Input Signals of LRB",expanded=True):
         st.write(" - El archivo ha sido subido correctamente.")
         # Aquí puedes agregar más lógica para visualizar el contenido del archivo
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-        #if S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
-            #df1= pd.read_csv(S1)
-            #st.write(df1.head())  # Muestra las primeras filas del archivo
+        if S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
+            df_S1= pd.read_csv(S1)
+            df_S1 = df_S1.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
+            st.write(df_S1.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
     st.write("**Input Signal 2:**")
@@ -580,16 +577,14 @@ with st.expander("Input Signals of LRB",expanded=True):
         st.write(" - El archivo ha sido subido correctamente.")
         # Aquí puedes agregar más lógica para visualizar el contenido del archivo
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-        #if S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
-            #df2 = pd.read_csv(S2)
-            #st.write(df2.head())  # Muestra las primeras filas del archivo
+        if S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
+            df_S2 = pd.read_csv(S2)
+            df_S2 = df_S2.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
+            st.write(df_S1.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
 
 
 if S1!=None and S2!=None:
-  DF_evaluar,resultados = load_dataset(S1,S2,df_input)
+  DF_evaluar,resultados = load_dataset(df_S1,df_S2,df_input)
   DF_evaluar.to_csv('dataframe.csv', index=False)
-  
-
-  
