@@ -321,7 +321,7 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
               'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
               'Probability':[nivel_final, segundo_nivel]
             }
-            st.dataframe(result,num_rows='dynamics')
+            st.dataframe(result,num_rows='dynamic')
 
             # CSS para colorear columnas
             st.markdown(
