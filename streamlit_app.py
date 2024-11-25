@@ -38,9 +38,6 @@ This is app predict the level of damage of lead rubber bearings
 Estudio: CITA ESTUDIO
         ''')
 
-#Configuracion de página
-# Agregar CSS para justificar el texto y eliminar la barra blanca superior
-
 # Pie de página con créditos
 footer = """
 <style>
