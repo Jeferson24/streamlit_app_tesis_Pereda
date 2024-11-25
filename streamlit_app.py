@@ -518,7 +518,7 @@ with columna1:
         st.subheader('Geometric Characteristics of LRB')
         #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
         #df
-        st.image(image, caption="Geometric Characteristics of LRB", width=200)
+        st.image(image, caption="Geometric Characteristics of LRB", width=250)
         # Mostrar los datos de ingreso en una tabla
         st.write("**Tabla de Propiedades Geométricas de Entrada**")
         df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
@@ -547,7 +547,7 @@ with columna3:
             input_signal_image= Image.open(BytesIO(response.content))
         else:
             st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
-        st.image(input_signal_image, caption=None, width=200)
+        st.image(input_signal_image, caption=None, width=250)
 
         st.write("Format of signal files:")
         # Reemplaza con tu ID de archivo de Google Drive
@@ -561,7 +561,7 @@ with columna3:
             input_signal2_image= Image.open(BytesIO(response2.content))
         else:
             st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
-        st.image(input_signal2_image, caption=None, width=200)
+        st.image(input_signal2_image, caption=None, width=250)
 
         st.write("**Input Signal 1:**")
         # Crear un expander para mostrar el estado del archivo
@@ -585,9 +585,9 @@ with columna3:
                 st.write(df.head())  # Muestra las primeras filas del archivo
         else:
             st.write("Aún no se ha subido ningún archivo.")
-        # Crear un expander para mostrar el estado del archivo
+
+        st.write("**Input Signal 2:**")
         if S2 is not None:
-            st.write("**Input Signal 2:**")
             st.markdown('''
             <style>
             [data-testid="stMarkdownContainer"] ul{
