@@ -328,6 +328,7 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
            'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
            'Probability':[nivel_final, segundo_nivel]
         }
+        df_result = pd.DataFrame(result)
         # CSS para colorear columnas
         st.markdown(
             """
@@ -427,8 +428,8 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
             </table>
         """
             # Convertimos el DataFrame en HTML y lo envolvemos en un contenedor centrado
-        html_table2 = result.to_html(index=False)
-        st.markdown(f'<div class="table-container">{html_table}</div>', unsafe_allow_html=True)
+        html_table2 = df_result.to_html(index=False)
+        st.markdown(f'<div class="table-container">{html_table2}</div>', unsafe_allow_html=True)
         # Mostrar la tabla en Streamlit
         st.markdown(html_table, unsafe_allow_html=True)
     return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
