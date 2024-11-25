@@ -471,10 +471,10 @@ with st.sidebar:
   
 
   st.write('**Input Signal 1**')
-  S1=st.sidebar.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1",type=["csv", "xlsx", "txt"])
+  S1=st.sidebar.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1",type=["txt"])
 
   st.write('**Input Signal 2**')
-  S2=st.sidebar.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2",type=["csv", "xlsx", "txt"])
+  S2=st.sidebar.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2",type=["txt"])
 
 
   #'Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)'
@@ -576,7 +576,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         st.write(" - El archivo ha sido subido correctamente.")
         # Aquí puedes agregar más lógica para visualizar el contenido del archivo
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-        if S1.name.endswith(".csv") or S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
+        if S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
             import pandas as pd
             df = pd.read_csv(S1)
             st.write(df.head())  # Muestra las primeras filas del archivo
@@ -588,7 +588,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         st.write(" - El archivo ha sido subido correctamente.")
         # Aquí puedes agregar más lógica para visualizar el contenido del archivo
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-        if S2.name.endswith(".csv") or S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
+        if S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
             import pandas as pd
             df = pd.read_csv(S2)
             st.write(df.head())  # Muestra las primeras filas del archivo
