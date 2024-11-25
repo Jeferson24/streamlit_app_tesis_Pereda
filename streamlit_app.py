@@ -496,6 +496,19 @@ input_data = {
     'Fycort_pb (MPa)':[Fycort_pb_mpa]
 }
 
+st.markdown(
+    """
+    <style>
+        button[title^=Exit]+div [data-testid=stImage]{
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+    </style>
+    """, unsafe_allow_html=True
+)
 
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
@@ -517,7 +530,7 @@ with st.expander('Geometric Characteristics of LRB',expanded=True):
         #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
         #df
     st.write("**Tabla de Propiedades Geométricas de Entrada**")
-    st.image(image, caption="Geometric Characteristics of LRB", width=250)
+    st.image(image, caption="Geometric Characteristics of LRB", width=400)
     # Mostrar los datos de ingreso en una tabla
     df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
     st.dataframe(df_input1_Trans, hide_index=True)
@@ -543,7 +556,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         input_signal_image= Image.open(BytesIO(response.content))
     else:
         st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
-    st.image(input_signal_image, caption=None, width=250)
+    st.image(input_signal_image, caption=None, width=400)
     st.write("Format of signal files:")
         # Reemplaza con tu ID de archivo de Google Drive
     input_signal2_file_id = '1f1a47OhcJ2vDe0gETxog8YFbo-10tLGV'  # Cambia este ID por el de tu imagen en Google Drive
@@ -556,7 +569,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         input_signal2_image= Image.open(BytesIO(response2.content))
     else:
         st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
-    st.image(input_signal2_image, caption=None, width=250)
+    st.image(input_signal2_image, caption=None, width=1000)
 
     st.write("**Input Signal 1:**")
     # Crear un expander para mostrar el estado del archivo
