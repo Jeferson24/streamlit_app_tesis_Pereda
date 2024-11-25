@@ -322,8 +322,8 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
     nivel_mayor=resultados.index(max(resultados))+1
     nivel_segundo_mayor=resultados.index(sorted(resultados)[-2])+1
 
-    st.header("RESULTADO")
     with st.expander('Result of Inspection',expanded=True):
+        st.markdown("<h1 style='text-align: center; color: black;'>Results of Inspection</h1>", unsafe_allow_html=True)
     #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
         result={
            'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
@@ -530,7 +530,7 @@ with st.expander('Geometric Characteristics of LRB',expanded=True):
     df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
     st.dataframe(df_input1_Trans, hide_index=True)
 with st.expander('Mechanics Propierties of LRB',expanded=True):
-   
+    st.markdown("<h1 style='text-align: center; color: black;'>Mechanics Propierties of LRB</h1>", unsafe_allow_html=True)
     #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
     # Mostrar los datos de ingreso en una tabla
     st.write("**Tabla de Propiedades Mecánicas de Entrada**")
