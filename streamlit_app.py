@@ -40,20 +40,6 @@ Estudio: CITA ESTUDIO
 
 #Configuracion de página
 # Agregar CSS para justificar el texto y eliminar la barra blanca superior
-st.markdown("""
-    <style>
-        /* Eliminar la barra blanca superior */
-        .css-18e3th9 {  /* Selector de la barra blanca superior */
-            padding-top: 0px;
-        }
-
-        /* Justificar todo el texto */
-        .markdown-text-container p {
-            text-align: justify;
-        }
-
-    </style>
-""", unsafe_allow_html=True)
 
 # Pie de página con créditos
 footer = """
