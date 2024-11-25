@@ -460,7 +460,8 @@ with st.sidebar:
   W_kg = st.slider('LRB Weight (kg)', 808, 1456, 1068, 1) #4
   e_pc_mm = st.slider('Thickness of Exterior Rubber Layer (mm)', 18, 20, 19, 1) #5
   cc_und = st.slider('Number Rubber Layers', 10, 30, 28, 1) #6
-  e_cc_mm = st.slider('Thickness of Interior Rubber Layers (mm)', 5, 8, 10, 1) #7
+  e_cc_mm = st.slider('Thickness of Interior Rubber Layers (mm)', 5, 8, 10, 1) #7 st.markdown("<h1 style='text-align: center; color: black;'>Mechanics Propierties of LRB</h1>", unsafe_allow_html=True)
+    #st.subheader('Mechanics Propierties of LRB')
   cs_und = st.slider('Number Steel Layers', 10, 30, 27, 1) #8
   e_cs_mm= st.slider('Thickness of Interior Steel Layers (mm)', 2.00, 4.00, 3.04, 0.01) #9
   Fy_ac_mpa=st.slider('Yield Strees Steel (Mpa)', 165, 345, 250, 1) #10
@@ -532,8 +533,7 @@ with st.expander('Geometric Characteristics of LRB',expanded=True):
     df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
     st.dataframe(df_input1_Trans, hide_index=True)
 with st.expander('Mechanics Propierties of LRB',expanded=True):
-    st.markdown("<h1 style='text-align: center; color: black;'>Mechanics Propierties of LRB</h1>", unsafe_allow_html=True)
-    #st.subheader('Mechanics Propierties of LRB')
+   
     #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
     # Mostrar los datos de ingreso en una tabla
     st.write("**Tabla de Propiedades Mecánicas de Entrada**")
@@ -541,7 +541,8 @@ with st.expander('Mechanics Propierties of LRB',expanded=True):
     st.dataframe(df_input2_Trans, hide_index=True)
 
 with st.expander("Input Signals of LRB",expanded=True):
-    st.subheader('Input Signals of LRB')
+    st.markdown("<h1 style='text-align: center; color: black;'>Input Signals of LRB</h1>", unsafe_allow_html=True)
+    #st.subheader('Input Signals of LRB')
     st.write("Positions of microtremor signals:")
     # Reemplaza con tu ID de archivo de Google Drive
     input_signal_file_id = '1btCDXwZrCy90sd48B0iZlPIcaohcn79N'  # Cambia este ID por el de tu imagen en Google Drive
@@ -594,7 +595,7 @@ with st.expander("Input Signals of LRB",expanded=True):
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
 
-if S1!=None or S2!=None:
+if S1!=None and S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
   DF_evaluar.to_csv('dataframe.csv', index=False)
   
