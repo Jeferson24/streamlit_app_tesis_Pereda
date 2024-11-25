@@ -10,6 +10,38 @@ from tensorflow.keras.models import load_model
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
 
+
+# Configuración de la página (debe ser lo primero)
+st.set_page_config(page_title='NISAIS LRB', page_icon=None, layout="centered", initial_sidebar_state="expanded", menu_items=None)
+st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
+st.info('This is app predict the level of damage of lead rubber bearings')
+
+# Pie de página con créditos
+footer = """
+<style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f0f0f0;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+        color: #555;
+    }
+</style>
+<div class="footer">
+    Desarrollado por <a>Pereda, J</a> © 2024
+    Asesor: Bedriñana, L.
+    Estudio: CITA ESTUDIO
+</div>
+"""
+st.markdown(footer, unsafe_allow_html=True)
+
+# Otro código o configuración
+st.markdown("Contenido inicial")
+
 import requests
 import tempfile
 import os
@@ -383,10 +415,6 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
 
   
 
-st.set_page_config(page_title=None, page_icon=None, layout="centered", initial_sidebar_state="expanded", menu_items=None)
-st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
-
-st.info('This is app predict the level of damage of lead rubber bearings')
 
 # Input features
 with st.sidebar:
