@@ -451,6 +451,8 @@ st.markdown(title_alignment, unsafe_allow_html=True)
 # Input features
 with st.sidebar:
   st.header('Input LRB propierties (Geometrical and mechanical)')
+  
+
   #Input propierties
   Di_mm = st.slider('LRB Diameter (mm)', 749.30, 952.50, 850.90,0.01) #1
   Ht_mm = st.slider('LRB High (mm)', 407.64, 420.34, 410.00,0.01) #2
@@ -504,20 +506,6 @@ input_data = {
     'Fycort_pb (MPa)':[Fycort_pb_mpa]
 }
 
-st.markdown(
-    """
-    <style>
-        button[title^=Exit]+div [data-testid=stImage]{
-            text-align: center;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-        }
-    </style>
-    """, unsafe_allow_html=True
-)
-
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
 df_input_transpuesto=df_input.T
@@ -534,7 +522,8 @@ else:
     st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
 
 with st.expander('Geometric Characteristics of LRB',expanded=True):
-    st.subheader('Geometric Characteristics of LRB')
+    st.markdown("<h1 style='text-align: center; color: black;'>Geometric Characteristics of LRB</h1>", unsafe_allow_html=True)
+    #st.subheader('Geometric Characteristics of LRB')
         #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
         #df
     st.write("**Tabla de Propiedades Geométricas de Entrada**")
@@ -543,7 +532,8 @@ with st.expander('Geometric Characteristics of LRB',expanded=True):
     df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
     st.dataframe(df_input1_Trans, hide_index=True)
 with st.expander('Mechanics Propierties of LRB',expanded=True):
-    st.subheader('Mechanics Propierties of LRB')
+    st.markdown("<h1 style='text-align: center; color: black;'>Mechanics Propierties of LRB</h1>", unsafe_allow_html=True)
+    #st.subheader('Mechanics Propierties of LRB')
     #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
     # Mostrar los datos de ingreso en una tabla
     st.write("**Tabla de Propiedades Mecánicas de Entrada**")
