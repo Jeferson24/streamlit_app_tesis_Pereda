@@ -41,17 +41,16 @@ footer = """
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #f0f0f0;
+        background-color: #f1f1f1;
         text-align: center;
-        padding: 10px 0;
+        padding: 10px;
         font-size: 14px;
-        color: #555;
     }
 </style>
 <div class="footer">
-    Desarrollado por <a>Pereda, J</a> © 2024
-    Asesor: Bedriñana, L.
-    Estudio: CITA ESTUDIO
+    <p>Desarrollado por <a href="https://www.linkedin.com/in/jefersonpereda/" target="_blank">Pereda, J</a> © 2024.</p>
+    </p>Asesor: Bedriñana, L.</p>
+    </p>Estudio: CITA ESTUDIO</p>
 </div>
 """
 st.markdown(footer, unsafe_allow_html=True)
