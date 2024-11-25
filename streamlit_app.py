@@ -273,11 +273,109 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
         st.header("RESULTADO")
         with st.expander('Result of Inspection',expanded=True):
         #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-          result={
+            result={
               'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
               'Probability':[nivel_final, segundo_nivel]
-          }
-          st.dataframe(result,num_rows='dynamics')
+            }
+            st.dataframe(result,num_rows='dynamics')
+
+            # CSS para colorear columnas
+            st.markdown(
+                """
+                <style>
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                th, td {
+                    text-align: center;
+                    padding: 8px;
+                    border: 1px solid #ddd;
+                }
+                th {
+                    background-color: #f4f4f4;
+                }
+                .col1 {
+                    background-color: #FFFFFF;  /* Color de la columna 1 */
+                }
+                .col2 {
+                    background-color: #64FF00;  /* Color de la columna 2 */
+                }
+                .col3 {
+                    background-color: #FBFF00;  /* Color de la columna 3 */
+                }
+                .col4 {
+                    background-color: #FFB200;  /* Color de la columna 3 */
+                }
+                .col5 {
+                    background-color: #FF0000;  /* Color de la columna 3 */
+                }
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+
+            # Tabla personalizada
+            html_table = """
+            <table>
+                <thead>
+                    <tr>
+                        <td class="title-row" colspan="3">NIVEL DE DETERIORO DEL AISLADOR SÍSMICO</td>
+                    </tr>
+                    <tr>
+                        <th>Criterios</th>
+                        <th>N1</th>
+                        <th>N2</th>
+                        <th>N3</th>
+                        <th>N4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col1">"DEFORMACIÓN VERTICAL PORCENTUAL (%respecto altura aislador)"</td>
+                        <td class="col2">"0%-2%"</td>
+                        <td class="col3">"2%-4%"</td>
+                        <td class="col4">"4%-6%"</td>
+                        <td class="col5">"6%<"</td>
+                        
+
+                    </tr>
+                    <tr>
+                        <td class="col1">"DISTORSIÓN HORIZONTAL PORCENTUAL (deformación por corte)"</td>
+                        <td class="col2">"0%-5%"</td>
+                        <td class="col3">"5%-10%"</td>
+                        <td class="col4">"10%-15%"</td>
+                        <td class="col5">"15%<"</td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="col1">"LONGITUD FISURA MÁXIMA (% respecto al diámetro)"</td>
+                        <td class="col2">"0%-5%"</td>
+                        <td class="col3">"5%-10%"</td>
+                        <td class="col4">"10%-15%"</td>
+                        <td class="col5">"15%<"</td>
+                    </tr>
+                    <tr>
+                        <td class="col1">"GRADO DE CORROSIÓN (piezas de acero, pernos y placas)"</td>
+                        <td class="col2">"a) Elementos sin corrosión ni sulfatación visible"</td>
+                        <td class="col3">"b) Pernos con manchas de corrosión o sulfatación"</td>
+                        <td class="col4">"c) Pernos y placa con manchas de corrosión o sulfatación"</td>
+                        <td class="col5">"d) Elementos con corrosión o sulfatación en la mayor parte de su área"</td>
+                    </tr>
+                    <tr>
+                        <td class="col1">"ESTADO DE CAUCHO"</td>
+                        <td class="col2">"d) Material desprendido y fisuras superficiales"</td>
+                        <td class="col3">"c) Con materia extraña superficial o indicios de degradación por ozono"</td>
+                        <td class="col4">"b) Con materia extraña superficial, sin degradación"</td>
+                        <td class="col5">"a) Sin materia extraña ni agrietamiento superficial"</td>
+                    </tr>
+                </tbody>
+            </table>
+            """
+
+            # Mostrar la tabla en Streamlit
+            st.markdown(html_table, unsafe_allow_html=True)
+
         return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
   else:
         st.error("Por favor, sube ambos archivos de señal.")
