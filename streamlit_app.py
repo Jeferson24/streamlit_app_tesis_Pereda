@@ -571,7 +571,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
         if S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
             import pandas as pd
-            df1= pd.read_csv(S1)
+            df1= pd.read_csv(S1, sep=' ')
             st.write(df1.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
@@ -583,7 +583,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
         if S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
             import pandas as pd
-            df2 = pd.read_csv(S2)
+            df2 = pd.read_csv(S2, sep=' ')
             st.write(df2.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
