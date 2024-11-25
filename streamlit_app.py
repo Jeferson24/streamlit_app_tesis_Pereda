@@ -16,6 +16,7 @@ from tensorflow.keras.models import load_model
 
 import streamlit as st
 
+
 # Reemplaza con tu ID de archivo de Google Drive
 favicon_file_id = '1nKWFplIxkb7ecKXhBJP9VdOeIjl7cTHb'  # Cambia este ID por el de tu imagen en Google Drive
 favicon_url = f"https://drive.google.com/uc?export=download&id={favicon_file_id}"
@@ -55,7 +56,7 @@ footer = """
 st.markdown(footer, unsafe_allow_html=True)
 
 
-#https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
+#CARGAR MODELOS ENTRENADOS
 
 # Reemplaza con tu ID de archivo de Google Drive
 file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'  # El ID del archivo en Google Drive
@@ -104,7 +105,7 @@ else:
     print(f"Error al descargar el modelo: {response.status_code}")
 
 
-###### Funciones######
+###### FUNCIONES FILTRADO######
 from scipy.signal import butter, filtfilt
 import glob
 import zipfile
@@ -142,8 +143,8 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
 
 DF_evaluar=pd.DataFrame()
 
-###### Feature Extraction #######
-def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' | 'U-D'
+###### FEATURE EXTRACTION #######
+def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E-W' | 'U-D'
   if S1 is not None and S2 is not None:
         # Leer los archivos directamente desde el objeto UploadedFile
         df_S1 = pd.read_csv(S1, sep=' ')  # Sótano 1
@@ -446,10 +447,10 @@ with st.sidebar:
   
 
   st.write('**Input Signal 1**')
-  S1=st.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
+  S1=st.sidebar.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
 
   st.write('**Input Signal 2**')
-  S2=st.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")
+  S2=st.sidebar.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")
 
 
   #'Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)'
@@ -485,32 +486,65 @@ input_data = {
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
 
-# Reemplaza con tu ID de archivo de Google Drive
-image_file_id = '1vp8Miwsz4P3BfqOHP2SyUgo3pZssN1M8'  # Cambia este ID por el de tu imagen en Google Drive
-image_url = f"https://drive.google.com/uc?export=download&id={image_file_id}"
+#Manejar en 3 columnas
+columna1, columna2, columna3 = st.columns(3)
+with columna1:
+    # Reemplaza con tu ID de archivo de Google Drive
+    image_file_id = '1vp8Miwsz4P3BfqOHP2SyUgo3pZssN1M8'  # Cambia este ID por el de tu imagen en Google Drive
+    image_url = f"https://drive.google.com/uc?export=download&id={image_file_id}"
 
-# Descargar la imagen
-response = requests.get(image_url)
+    # Descargar la imagen
+    response = requests.get(image_url)
 
-if response.status_code == 200:
-    image = Image.open(BytesIO(response.content))
-else:
-    st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+    if response.status_code == 200:
+        image = Image.open(BytesIO(response.content))
+    else:
+        st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
 
-with st.expander('Geometric characteristics of LRB',expanded=True):
-  #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
-  #df
-  st.image(image, caption="Geometric Characteristics of LRB", width=300)
-  # Mostrar los datos de ingreso en una tabla
-  st.write("**Tabla de Propiedades Geométricas de Entrada**")
-  st.table(df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1))
+    with st.expander(None,expanded=True):
+        st.subheader('Geometric Characteristics of LRB')
+        #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
+        #df
+        st.image(image, caption="Geometric Characteristics of LRB", width=300)
+        # Mostrar los datos de ingreso en una tabla
+        st.write("**Tabla de Propiedades Geométricas de Entrada**")
+        df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1).T
+        st.dataframe(df_input1_Trans, num_rows='dynamic')
+with columna2:
+    with st.expander(None,expanded=True):
+        st.subheader('Mechanics Propierties of LRB')
+        #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+        # Mostrar los datos de ingreso en una tabla
+        st.write("**Tabla de Propiedades Mecánicas de Entrada**")
+        df_input2_Trans=df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1).T
+        st.dataframe(df_input2_Trans, num_rows='dynamic')
+with columna3:
+    with st.expander(None,expanded=True):
+        # Crear un expander para mostrar el estado del archivo
+        if S1 is not None:
+            st.write("El archivo ha sido subido correctamente.")
+            # Aquí puedes agregar más lógica para visualizar el contenido del archivo
+            # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
+            if S1.name.endswith(".csv"):
+                import pandas as pd
+                df = pd.read_csv(S1)
+                st.write(df.head())  # Muestra las primeras filas del archivo
+        else:
+            st.write("Aún no se ha subido ningún archivo.")
+        # Crear un expander para mostrar el estado del archivo
+        if uploaded_file is not None:
+            st.write("El archivo ha sido subido correctamente.")
+            # Aquí puedes agregar más lógica para visualizar el contenido del archivo
+            # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
+            if uploaded_file.name.endswith(".csv"):
+                import pandas as pd
+                df = pd.read_csv(uploaded_file)
+                st.write(df.head())  # Muestra las primeras filas del archivo
+        else:
+            st.write("Aún no se ha subido ningún archivo.")
 
-with st.expander('Mechanical Propierties of LRB Materials',expanded=True):
-  #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-   # Mostrar los datos de ingreso en una tabla
-  st.write("**Tabla de Propiedades Mecánicas de Entrada**")
-  st.table(df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1))
-  
+
+
 if S1!=None or S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
   DF_evaluar.to_csv('dataframe.csv', index=False)
