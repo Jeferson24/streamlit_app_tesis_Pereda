@@ -437,7 +437,15 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E
         st.error("Por favor, sube ambos archivos de señal.")
         return None
 
-  
+
+title_alignment="""
+<style>
+#the-title {
+  text-align: center
+}
+</style>
+"""
+st.markdown(title_alignment, unsafe_allow_html=True)
 
 
 # Input features
