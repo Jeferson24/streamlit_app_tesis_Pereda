@@ -572,7 +572,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         if S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
             import pandas as pd
             df1= pd.read_csv(S1)
-            st.write(df.head())  # Muestra las primeras filas del archivo
+            st.write(df1.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
     st.write("**Input Signal 2:**")
