@@ -1,5 +1,8 @@
+import requests
+import tempfile
+import os
+import joblib
 import streamlit as st
-
 #https://drive.google.com/file/d/1nKWFplIxkb7ecKXhBJP9VdOeIjl7cTHb/view?usp=sharing
 
 # Reemplaza con tu ID de archivo de Google Drive
@@ -53,11 +56,6 @@ from sklearn.preprocessing import StandardScaler
 from tensorflow.keras.models import load_model
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
-
-import requests
-import tempfile
-import os
-import joblib
 
 # Reemplaza con tu ID de archivo de Google Drive
 file_id = '1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol'  # El ID del archivo en Google Drive
