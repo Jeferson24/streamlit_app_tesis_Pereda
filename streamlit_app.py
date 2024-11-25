@@ -518,9 +518,9 @@ with columna1:
         st.subheader('Geometric Characteristics of LRB')
         #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
         #df
+        st.write("**Tabla de Propiedades Geométricas de Entrada**")
         st.image(image, caption="Geometric Characteristics of LRB", width=250)
         # Mostrar los datos de ingreso en una tabla
-        st.write("**Tabla de Propiedades Geométricas de Entrada**")
         df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
         st.dataframe(df_input1_Trans)
 with columna2:
@@ -590,8 +590,6 @@ with columna3:
                 st.write(df.head())  # Muestra las primeras filas del archivo
         else:
             st.write(" - Aún no se ha subido ningún archivo.")
-
-
 
 if S1!=None or S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
