@@ -328,18 +328,22 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
            'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
            'Probability':[nivel_final, segundo_nivel]
         }
-        st.dataframe(result,hide_index=True)
         # CSS para colorear columnas
         st.markdown(
             """
             <style>
+
+            .table-container {
+            display: flex;
+            justify-content: center;
+            }
             table {
                 border-collapse: collapse;
                 width: 100%;
             }
             th, td {
                 text-align: center;
-                padding: 8px;
+                padding: 10px;
                 border: 1px solid #ddd;
             }
             th {
@@ -422,7 +426,7 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
                 </tbody>
             </table>
         """
-
+        st.markdown('<div class="table-container">' + st.dataframe(result, hide_index=True).markdown + '</div>', unsafe_allow_html=True)
         # Mostrar la tabla en Streamlit
         st.markdown(html_table, unsafe_allow_html=True)
     return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
