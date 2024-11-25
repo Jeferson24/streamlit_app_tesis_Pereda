@@ -426,7 +426,9 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
                 </tbody>
             </table>
         """
-        st.markdown('<div class="table-container">' + st.dataframe(result, hide_index=True).markdown + '</div>', unsafe_allow_html=True)
+            # Convertimos el DataFrame en HTML y lo envolvemos en un contenedor centrado
+        html_table2 = result.to_html(index=False)
+        st.markdown(f'<div class="table-container">{html_table}</div>', unsafe_allow_html=True)
         # Mostrar la tabla en Streamlit
         st.markdown(html_table, unsafe_allow_html=True)
     return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
