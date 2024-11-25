@@ -34,8 +34,9 @@ st.set_page_config(page_title='NISAIS LRB', page_icon=favicon1, layout="wide", i
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 st.write('Autor: Jeferson Pereda | Asesor: Luis Bedriñana')
 st.info('''
-This is app predict the level of damage of lead rubber bearings
-Estudio: CITA ESTUDIO
+    This is app predict the level of damage of lead rubber bearings
+        
+    Estudio: CITA ESTUDIO
         ''')
 
 # Pie de página con créditos
@@ -520,7 +521,7 @@ with columna1:
         st.image(image, caption="Geometric Characteristics of LRB", width=200)
         # Mostrar los datos de ingreso en una tabla
         st.write("**Tabla de Propiedades Geométricas de Entrada**")
-        df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1).T
+        df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
         st.dataframe(df_input1_Trans)
 with columna2:
     with st.expander('Mechanics Propierties of LRB',expanded=True):
@@ -528,7 +529,7 @@ with columna2:
         #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
         # Mostrar los datos de ingreso en una tabla
         st.write("**Tabla de Propiedades Mecánicas de Entrada**")
-        df_input2_Trans=df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1).T
+        df_input2_Trans=df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1)
         st.dataframe(df_input2_Trans)
 with columna3:
     with st.expander("Input Signals of LRB",expanded=True):
