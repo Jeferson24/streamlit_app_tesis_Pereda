@@ -160,7 +160,6 @@ DF_evaluar=pd.DataFrame()
 ###### FEATURE EXTRACTION #######
 def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E-W' | 'U-D'
    
-
     #APLICACIÓN DEL BAND PASS FILTER A LA SEÑAL
     fs = 100  # Sample rate
 
