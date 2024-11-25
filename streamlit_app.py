@@ -368,9 +368,9 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
             # Tabla personalizada
         html_table = """
             <table>
-                <thead>
+                <tbody>
                     <tr>
-                        <td class="title-row" colspan="3">NIVEL DE DETERIORO DEL AISLADOR SÍSMICO</td>
+                        <td class="title-row" colspan="5">NIVEL DE DETERIORO DEL AISLADOR SÍSMICO</td>
                     </tr>
                     <tr>
                         <th>Criterios</th>
@@ -379,8 +379,6 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
                         <th>N3</th>
                         <th>N4</th>
                     </tr>
-                </thead>
-                <tbody>
                     <tr>
                         <td class="col1">"DEFORMACIÓN VERTICAL PORCENTUAL (%respecto altura aislador)"</td>
                         <td class="col2">"0%-2%"</td>
