@@ -2,6 +2,9 @@ import requests
 import tempfile
 import os
 import joblib
+from PIL import Image
+import requests
+from io import BytesIO
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -483,10 +486,6 @@ input_data = {
 
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
-
-from PIL import Image
-import requests
-from io import BytesIO
 
 # Reemplaza con tu ID de archivo de Google Drive
 image_file_id = '1vp8Miwsz4P3BfqOHP2SyUgo3pZssN1M8'  # Cambia este ID por el de tu imagen en Google Drive
