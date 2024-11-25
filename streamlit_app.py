@@ -1,15 +1,4 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import tensorflow as tf
-from tensorflow import keras
-import tsfel
-from sklearn.preprocessing import StandardScaler
-from tensorflow.keras.models import load_model
-
-#https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
-
 
 # Configuración de la página (debe ser lo primero)
 st.set_page_config(page_title='NISAIS LRB', page_icon=None, layout="centered", initial_sidebar_state="expanded", menu_items=None)
@@ -39,8 +28,17 @@ footer = """
 """
 st.markdown(footer, unsafe_allow_html=True)
 
-# Otro código o configuración
-st.markdown("Contenido inicial")
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+from tensorflow import keras
+import tsfel
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.models import load_model
+
+#https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
 
 import requests
 import tempfile
