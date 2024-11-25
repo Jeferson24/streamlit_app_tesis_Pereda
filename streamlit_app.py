@@ -1,3 +1,4 @@
+import streamlit as st
 import requests
 import tempfile
 import os
@@ -14,7 +15,7 @@ import tsfel
 from sklearn.preprocessing import StandardScaler
 from tensorflow.keras.models import load_model
 
-import streamlit as st
+
 
 
 # Reemplaza con tu ID de archivo de Google Drive
