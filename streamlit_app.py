@@ -33,8 +33,11 @@ else:
 st.set_page_config(page_title='NISAIS LRB', page_icon=favicon1, layout="centered", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 st.write('Autor: Jeferson Pereda | Asesor: Luis Bedriñana')
-st.info('This is app predict the level of damage of lead rubber bearings')
-st.info('Estudio: CITA ESTUDIO')
+st.info('''
+This is app predict the level of damage of lead rubber bearings
+Estudio: CITA ESTUDIO
+        ''')
+
 
 # Pie de página con créditos
 footer = """
@@ -521,6 +524,35 @@ with columna2:
         st.dataframe(df_input2_Trans, num_rows='dynamic')
 with columna3:
     with st.expander(None,expanded=True):
+        st.subheader('Input Signals of LRB')
+
+        st.write("Positions of microtremor signals:")
+        # Reemplaza con tu ID de archivo de Google Drive
+        input_signal_file_id = '1btCDXwZrCy90sd48B0iZlPIcaohcn79N'  # Cambia este ID por el de tu imagen en Google Drive
+        input_signal_url = f"https://drive.google.com/uc?export=download&id={input_signal_file_id}"
+
+        # Descargar la imagen
+        response = requests.get(input_signal_url)
+
+        if response.status_code == 200:
+            input_signal_image= Image.open(BytesIO(response.content))
+        else:
+            st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+
+        st.write("Format of signal files:")
+        # Reemplaza con tu ID de archivo de Google Drive
+        input_signal2_file_id = '1f1a47OhcJ2vDe0gETxog8YFbo-10tLGV'  # Cambia este ID por el de tu imagen en Google Drive
+        input_signal2_url = f"https://drive.google.com/uc?export=download&id={input_signal2_file_id}"
+
+        # Descargar la imagen
+        response2 = requests.get(input_signal2_url)
+
+        if response2.status_code == 200:
+            input_signal2_image= Image.open(BytesIO(response2.content))
+        else:
+            st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+
+
         # Crear un expander para mostrar el estado del archivo
         if S1 is not None:
             st.write("Input Signal 1:")
