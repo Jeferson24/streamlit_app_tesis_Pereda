@@ -567,15 +567,7 @@ with columna3:
         # Crear un expander para mostrar el estado del archivo
         if S1 is not None:
 
-            st.markdown('''
-            <style>
-            [data-testid="stMarkdownContainer"] ul{
-                list-style-position: inside;
-            }
-            </style>
-            ''', unsafe_allow_html=True)
-
-            st.markdown("- El archivo ha sido subido correctamente.")
+            st.write(" - El archivo ha sido subido correctamente.")
       
             # Aquí puedes agregar más lógica para visualizar el contenido del archivo
             # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
@@ -584,19 +576,12 @@ with columna3:
                 df = pd.read_csv(S1)
                 st.write(df.head())  # Muestra las primeras filas del archivo
         else:
-            st.write("Aún no se ha subido ningún archivo.")
+            st.write(" - Aún no se ha subido ningún archivo.")
 
         st.write("**Input Signal 2:**")
         if S2 is not None:
-            st.markdown('''
-            <style>
-            [data-testid="stMarkdownContainer"] ul{
-                list-style-position: inside;
-            }
-            </style>
-            ''', unsafe_allow_html=True)
 
-            st.markdown("- El archivo ha sido subido correctamente.")
+            st.write(" - El archivo ha sido subido correctamente.")
             # Aquí puedes agregar más lógica para visualizar el contenido del archivo
             # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
             if S2.name.endswith(".csv") or S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
@@ -604,7 +589,7 @@ with columna3:
                 df = pd.read_csv(S2)
                 st.write(df.head())  # Muestra las primeras filas del archivo
         else:
-            st.write("Aún no se ha subido ningún archivo.")
+            st.write(" - Aún no se ha subido ningún archivo.")
 
 
 
