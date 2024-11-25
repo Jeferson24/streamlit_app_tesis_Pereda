@@ -331,41 +331,46 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
         st.dataframe(result,hide_index=True)
         # CSS para colorear columnas
         st.markdown(
-                """
-                <style>
-                table {
-                    border-collapse: collapse;
-                    width: 100%;
-                }
-                th, td {
-                    text-align: center;
-                    padding: 8px;
-                    border: 1px solid #ddd;
-                }
-                th {
-                    background-color: #f4f4f4;
-                }
-                .col1 {
-                    background-color: #FFFFFF;  /* Color de la columna 1 */
-                }
-                .col2 {
-                    background-color: #64FF00;  /* Color de la columna 2 */
-                }
-                .col3 {
-                    background-color: #FBFF00;  /* Color de la columna 3 */
-                }
-                .col4 {
-                    background-color: #FFB200;  /* Color de la columna 3 */
-                }
-                .col5 {
-                    background-color: #FF0000;  /* Color de la columna 3 */
-                }
-                </style>
-                """,
+            """
+            <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td {
+                text-align: center;
+                padding: 8px;
+                border: 1px solid #ddd;
+            }
+            th {
+                background-color: #f4f4f4;
+            }
+            .col1 {
+                background-color: #FFFFFF;
+            }
+            .col2 {
+                background-color: #64FF00;
+            }
+            .col3 {
+                background-color: #FBFF00;
+            }
+            .col4 {
+                background-color: #FFB200;
+            }
+            .col5 {
+                background-color: #FF0000;
+            }
+            .title-row {
+                font-weight: bold;
+                font-size: 16px;
+                background-color: #f1f1f1;
+            }
+            </style>
+            """,
             unsafe_allow_html=True
         )
 
-            # Tabla personalizada
+        # Tabla personalizada
         html_table = """
             <table>
                 <tbody>
@@ -380,48 +385,45 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
                         <th>N4</th>
                     </tr>
                     <tr>
-                        <td class="col1">"DEFORMACIÓN VERTICAL PORCENTUAL (%respecto altura aislador)"</td>
-                        <td class="col2">"0%-2%"</td>
-                        <td class="col3">"2%-4%"</td>
-                        <td class="col4">"4%-6%"</td>
-                        <td class="col5">"6%<"</td>
-                        
-
+                        <td class="col1">DEFORMACIÓN VERTICAL PORCENTUAL (% respecto altura aislador)</td>
+                        <td class="col2">0%-2%</td>
+                        <td class="col3">2%-4%</td>
+                        <td class="col4">4%-6%</td>
+                        <td class="col5">6%&lt;</td>
                     </tr>
                     <tr>
-                        <td class="col1">"DISTORSIÓN HORIZONTAL PORCENTUAL (deformación por corte)"</td>
-                        <td class="col2">"0%-5%"</td>
-                        <td class="col3">"5%-10%"</td>
-                        <td class="col4">"10%-15%"</td>
-                        <td class="col5">"15%<"</td>
-                        
+                        <td class="col1">DISTORSIÓN HORIZONTAL PORCENTUAL (deformación por corte)</td>
+                        <td class="col2">0%-5%</td>
+                        <td class="col3">5%-10%</td>
+                        <td class="col4">10%-15%</td>
+                        <td class="col5">15%&lt;</td>
                     </tr>
                     <tr>
-                        <td class="col1">"LONGITUD FISURA MÁXIMA (% respecto al diámetro)"</td>
-                        <td class="col2">"0%-5%"</td>
-                        <td class="col3">"5%-10%"</td>
-                        <td class="col4">"10%-15%"</td>
-                        <td class="col5">"15%<"</td>
+                        <td class="col1">LONGITUD FISURA MÁXIMA (% respecto al diámetro)</td>
+                        <td class="col2">0%-5%</td>
+                        <td class="col3">5%-10%</td>
+                        <td class="col4">10%-15%</td>
+                        <td class="col5">15%&lt;</td>
                     </tr>
                     <tr>
-                        <td class="col1">"GRADO DE CORROSIÓN (piezas de acero, pernos y placas)"</td>
-                        <td class="col2">"a) Elementos sin corrosión ni sulfatación visible"</td>
-                        <td class="col3">"b) Pernos con manchas de corrosión o sulfatación"</td>
-                        <td class="col4">"c) Pernos y placa con manchas de corrosión o sulfatación"</td>
-                        <td class="col5">"d) Elementos con corrosión o sulfatación en la mayor parte de su área"</td>
+                        <td class="col1">GRADO DE CORROSIÓN (piezas de acero, pernos y placas)</td>
+                        <td class="col2">a) Elementos sin corrosión ni sulfatación visible</td>
+                        <td class="col3">b) Pernos con manchas de corrosión o sulfatación</td>
+                        <td class="col4">c) Pernos y placa con manchas de corrosión o sulfatación</td>
+                        <td class="col5">d) Elementos con corrosión o sulfatación en la mayor parte de su área</td>
                     </tr>
                     <tr>
-                        <td class="col1">"ESTADO DE CAUCHO"</td>
-                        <td class="col2">"d) Material desprendido y fisuras superficiales"</td>
-                        <td class="col3">"c) Con materia extraña superficial o indicios de degradación por ozono"</td>
-                        <td class="col4">"b) Con materia extraña superficial, sin degradación"</td>
-                        <td class="col5">"a) Sin materia extraña ni agrietamiento superficial"</td>
+                        <td class="col1">ESTADO DE CAUCHO</td>
+                        <td class="col2">d) Material desprendido y fisuras superficiales</td>
+                        <td class="col3">c) Con materia extraña superficial o indicios de degradación por ozono</td>
+                        <td class="col4">b) Con materia extraña superficial, sin degradación</td>
+                        <td class="col5">a) Sin materia extraña ni agrietamiento superficial</td>
                     </tr>
                 </tbody>
             </table>
-            """
+        """
 
-            # Mostrar la tabla en Streamlit
+        # Mostrar la tabla en Streamlit
         st.markdown(html_table, unsafe_allow_html=True)
     return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
 
