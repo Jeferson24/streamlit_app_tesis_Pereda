@@ -1,7 +1,21 @@
 import streamlit as st
 
+#https://drive.google.com/file/d/1nKWFplIxkb7ecKXhBJP9VdOeIjl7cTHb/view?usp=sharing
+
+# Reemplaza con tu ID de archivo de Google Drive
+favicon_file_id = '1nKWFplIxkb7ecKXhBJP9VdOeIjl7cTHb'  # Cambia este ID por el de tu imagen en Google Drive
+favicon_url = f"https://drive.google.com/uc?export=download&id={favicon_file_id}"
+
+# Descargar la imagen
+response1 = requests.get(favicon_url)
+
+if response1.status_code == 200:
+    favicon1= Image.open(BytesIO(response1.content))
+else:
+    st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+
 # Configuración de la página (debe ser lo primero)
-st.set_page_config(page_title='NISAIS LRB', page_icon=None, layout="centered", initial_sidebar_state="expanded", menu_items=None)
+st.set_page_config(page_title='NISAIS LRB', page_icon=favicon1, layout="centered", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 st.info('This is app predict the level of damage of lead rubber bearings')
 
