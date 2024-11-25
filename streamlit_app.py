@@ -32,9 +32,8 @@ else:
 st.set_page_config(page_title='NISAIS LRB', page_icon=favicon1, layout="centered", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 st.info('This is app predict the level of damage of lead rubber bearings')
-st.write('Autor: Jeferson Pereda')
-st.write('Asesor: Luis Bedriñana')
-st.write('Estudio: CITA ESTUDIO')
+st.write('Autor: Jeferson Pereda | Asesor: Luis Bedriñana |')
+st.info('Estudio: CITA ESTUDIO')
 # Pie de página con créditos
 footer = """
 <style>
@@ -50,7 +49,7 @@ footer = """
     }
 </style>
 <div class="footer">
-    <p>Desarrollado por <a href="https://www.linkedin.com/in/jefersonpereda/" target="_blank">Pereda, J</a> © 2024.</p>
+    Desarrollado por <a href="https://www.linkedin.com/in/jefersonpereda/" target="_blank">Pereda, J</a> © 2024.
 </div>
 """
 st.markdown(footer, unsafe_allow_html=True)
@@ -501,7 +500,7 @@ else:
 with st.expander('Geometric characteristics of LRB',expanded=True):
   #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
   #df
-  st.image(image, caption="Geometric Characteristics of LRB")
+  st.image(image, caption="Geometric Characteristics of LRB", width=300)
   # Mostrar los datos de ingreso en una tabla
   st.write("**Tabla de Propiedades Geométricas de Entrada**")
   st.table(df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1))
