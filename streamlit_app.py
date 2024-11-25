@@ -10,22 +10,6 @@ from tensorflow.keras.models import load_model
 
 #https://drive.google.com/uc?export=download&id=1RKYmoTDteQ9IiScgZOHfIUQ16gLizxol
 
-st.markdown(
-    """
-    <style>
-    .st-expander > div > div > div {
-        font-size: 24px;  /* Cambia el tamaño del texto del título */
-        font-weight: bold;  /* Aplica negrita */
-        color: #FF5733;  /* Cambia el color del título (naranja en este caso) */
-        background-color: #F5F5F5;  /* Cambia el color de fondo del título */
-        padding: 10px;  /* Agrega un relleno alrededor del título */
-        border-radius: 5px;  /* Bordes redondeados */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 import requests
 import tempfile
 import os
@@ -286,11 +270,14 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'tiempo(s)' | 'N-S' | 'E-W' |
         segundo_nivel=sorted(resultados)[-2]/total*100
         nivel_mayor=resultados.index(max(resultados))+1
         nivel_segundo_mayor=resultados.index(sorted(resultados)[-2])+1
+        st.header("RESULTADO")
         with st.expander('Result of Inspection',expanded=True):
         #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-          st.write('Level of Deterioration '+str(nivel_mayor)+'-> Probabilidad: '+str(nivel_final))
-          st.write('Second Level of Deterioration '+str(nivel_segundo_mayor)+'-> Probabilidad: '+str(segundo_nivel))
-
+          result={
+              'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
+              'Probability':[nivel_final, segundo_nivel]
+          }
+          st.table(result)
         return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
   else:
         st.error("Por favor, sube ambos archivos de señal.")
