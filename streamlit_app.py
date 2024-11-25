@@ -537,16 +537,16 @@ with columna1:
         st.image(image, caption="Geometric Characteristics of LRB", width=300)
         # Mostrar los datos de ingreso en una tabla
         st.write("**Tabla de Propiedades Geométricas de Entrada**")
-        df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1).T
-        st.dataframe(df_input1_Trans, num_rows='dynamic')
+        df_input1_trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1).T
+        st.dataframe(df_input1_trans)
 with columna2:
     with st.expander('Mechanics Propierties of LRB',expanded=True):
         st.subheader('Mechanics Propierties of LRB')
         #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
         # Mostrar los datos de ingreso en una tabla
         st.write("**Tabla de Propiedades Mecánicas de Entrada**")
-        df_input2_Trans=df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1).T
-        st.dataframe(df_input2_Trans, num_rows='dynamic')
+        df_input2_trans=df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1).T
+        st.dataframe(df_input2_trans)
 with columna3:
     with st.expander("Input Signals of LRB",expanded=True):
         st.subheader('Input Signals of LRB')
