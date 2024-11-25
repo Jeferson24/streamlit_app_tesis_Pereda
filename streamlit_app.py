@@ -588,7 +588,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         if S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
             df_S2 = pd.read_csv(S2, sep=' ')
             df_S2 = df_S2.loc[:, ~df_S2.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
-            st.write(df_S1.head())  # Muestra las primeras filas del archivo
+            st.write(df_S2.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
 
