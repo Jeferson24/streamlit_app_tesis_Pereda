@@ -158,42 +158,41 @@ DF_evaluar=pd.DataFrame()
 
 ###### FEATURE EXTRACTION #######
 def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E-W' | 'U-D'
-  if S1 is not None and S2 is not None:
-        # Leer los archivos directamente desde el objeto UploadedFile
-        df_S1 = pd.read_csv(S1, sep=' ')  # Sótano 1
-        df_S2 = pd.read_csv(S2, sep=' ')  # Sótano 2
-        df_S1 = df_S1.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
-        df_S2 = df_S2.loc[:, ~df_S2.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
+    # Leer los archivos directamente desde el objeto UploadedFile
+    df_S1 = pd.read_csv(S1, sep=' ')  # Sótano 1
+    df_S2 = pd.read_csv(S2, sep=' ')  # Sótano 2
+    df_S1 = df_S1.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
+    df_S2 = df_S2.loc[:, ~df_S2.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
 
-      #APLICACIÓN DEL BAND PASS FILTER A LA SEÑAL
-        fs = 100  # Sample rate
+    #APLICACIÓN DEL BAND PASS FILTER A LA SEÑAL
+    fs = 100  # Sample rate
 
-        #Bandpass filter
-        lowcut=0.25
-        highcut=20
+    #Bandpass filter
+    lowcut=0.25
+    highcut=20
 
-        # Crear la lista de tiempo con un paso de 0.01s
-        time=np.arange(0,len(df_S1))/fs
-        time=[round(tiempo, 2) for tiempo in time]
+    # Crear la lista de tiempo con un paso de 0.01s
+    time=np.arange(0,len(df_S1))/fs
+    time=[round(tiempo, 2) for tiempo in time]
 
-        #Constantes de conversión V a gal (0.01 m/s^2)
-        P=float(1/8)
-        U=float(1/8)
-        S=float(1/2)
+    #Constantes de conversión V a gal (0.01 m/s^2)
+    P=float(1/8)
+    U=float(1/8)
+    S=float(1/2)
 
-        #Aplicación de la conversión
-        df_S1["tiempo(s)"] = time
-        df_S1['N-S_filtered'] = butter_bandpass_filter(df_S1['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
-        df_S1['E-W_filtered'] = butter_bandpass_filter(df_S1['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
-        df_S1['U-D_filtered'] = butter_bandpass_filter(df_S1['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
+    #Aplicación de la conversión
+    df_S1["tiempo(s)"] = time
+    df_S1['N-S_filtered'] = butter_bandpass_filter(df_S1['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
+    df_S1['E-W_filtered'] = butter_bandpass_filter(df_S1['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
+    df_S1['U-D_filtered'] = butter_bandpass_filter(df_S1['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
 
-        df_S2["tiempo(s)"] = time
-        df_S2['N-S_filtered'] = butter_bandpass_filter(df_S2['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
-        df_S2['E-W_filtered'] = butter_bandpass_filter(df_S2['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
-        df_S2['U-D_filtered'] = butter_bandpass_filter(df_S2['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
+    df_S2["tiempo(s)"] = time
+    df_S2['N-S_filtered'] = butter_bandpass_filter(df_S2['N-S']*(P)*(U)*(S), lowcut, highcut, fs)
+    df_S2['E-W_filtered'] = butter_bandpass_filter(df_S2['E-W']*(P)*(U)*(S), lowcut, highcut, fs)
+    df_S2['U-D_filtered'] = butter_bandpass_filter(df_S2['U-D']*(P)*(U)*(S), lowcut, highcut, fs)
 
-        df_filtered_S1 = df_S1[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
-        df_filtered_S2 = df_S2[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
+    df_filtered_S1 = df_S1[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
+    df_filtered_S2 = df_S2[['tiempo(s)', 'N-S_filtered', 'E-W_filtered', 'U-D_filtered']]
 
 
        
@@ -227,18 +226,18 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E
       
 
         #SEÑAL S1
-        acelerometer_Horizontal_1=df_filtered_S1['N-S_filtered'] * 0.7 + df_filtered_S1['E-W_filtered'] * 0.3
-        acelerometer_Vertical_1=df_filtered_S1['U-D_filtered']
-        #Añadiendo columnas a la señal S1
-        df_filtered_S1["Horizontal"]=acelerometer_Horizontal_1
-        df_filtered_S1["Vertical"]=acelerometer_Vertical_1
+    acelerometer_Horizontal_1=df_filtered_S1['N-S_filtered'] * 0.7 + df_filtered_S1['E-W_filtered'] * 0.3
+    acelerometer_Vertical_1=df_filtered_S1['U-D_filtered']
+    #Añadiendo columnas a la señal S1
+    df_filtered_S1["Horizontal"]=acelerometer_Horizontal_1
+    df_filtered_S1["Vertical"]=acelerometer_Vertical_1
 
-        #SEÑAL S2
-        acelerometer_Horizontal_2=df_filtered_S2['N-S_filtered'] * 0.7 + df_filtered_S2['E-W_filtered'] * 0.3
-        acelerometer_Vertical_2=df_filtered_S2['U-D_filtered']
-        #Añadiendo columnas a la señal S2
-        df_filtered_S2["Horizontal"]=acelerometer_Horizontal_2
-        df_filtered_S2["Vertical"]=acelerometer_Vertical_2
+    #SEÑAL S2
+    acelerometer_Horizontal_2=df_filtered_S2['N-S_filtered'] * 0.7 + df_filtered_S2['E-W_filtered'] * 0.3
+    acelerometer_Vertical_2=df_filtered_S2['U-D_filtered']
+    #Añadiendo columnas a la señal S2
+    df_filtered_S2["Horizontal"]=acelerometer_Horizontal_2
+    df_filtered_S2["Vertical"]=acelerometer_Vertical_2
 
         
         #plt.plot(df_S1['tiempo(s)'], df_filtered_S1['Horizontal'], label='Horizontal: N-S (70%) + E-W (30%)',c='maroon',linewidth=0.5)
@@ -258,85 +257,84 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E
         
         #EXTRACCIÓN DE FEATURE POR CADA SEÑAL
 
-        #FEATURES S1
-        acel_horiz_S1=df_filtered_S1["Horizontal"]
-        acel_vert_S1=df_filtered_S1["Vertical"]
-        cfg_file = tsfel.get_features_by_domain()
+    #FEATURES S1
+    acel_horiz_S1=df_filtered_S1["Horizontal"]
+    acel_vert_S1=df_filtered_S1["Vertical"]
+    cfg_file = tsfel.get_features_by_domain()
 
         #Feature Extraction de señal Horizontal S1
-        X_data_S1 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S1, fs=100, window_size=1000,overlap=0.1)
+    X_data_S1 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S1, fs=100, window_size=1000,overlap=0.1)
         #X_data_S1.to_excel(excel_writer=(r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S1_H.xlsx'))
         #X_data_S1.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S1_H.txt', sep=' ', index=False)
 
         #FEATURES S2
-        acel_horiz_S2=df_filtered_S2["Horizontal"]
-        acel_vert_S2=df_filtered_S2["Vertical"]
+    acel_horiz_S2=df_filtered_S2["Horizontal"]
+    acel_vert_S2=df_filtered_S2["Vertical"]
 
         #Feature Extraction de señal Horizontal S2
-        X_data_S2 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S2, fs=100, window_size=1000,overlap=0.1)
-        X_data_S2.columns = ['1' + col[1:] for col in X_data_S2]
+    X_data_S2 = tsfel.time_series_features_extractor(cfg_file, acel_horiz_S2, fs=100, window_size=1000,overlap=0.1)
+    X_data_S2.columns = ['1' + col[1:] for col in X_data_S2]
         #X_data_S2.to_excel(excel_writer=(r'/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S2_H.xlsx'))
         #X_data_S2.to_csv('/content/drive/My Drive/TESIS/ARR3_MED_FILT/'+aislador+'/DATA_S2_H.txt', sep=' ', index=False)
 
         #APLICACIÓN DE FUNCIÓN DE TRANSFERENCIA (S1/S2)
 
-        prop_GM= pd.concat([prop_GM] * (len(X_data_S1)), ignore_index=True)
+    prop_GM= pd.concat([prop_GM] * (len(X_data_S1)), ignore_index=True)
 
-        df_combined = pd.concat([prop_GM,X_data_S1, X_data_S2], axis=1)
+    df_combined = pd.concat([prop_GM,X_data_S1, X_data_S2], axis=1)
 
-        def rename_columns(column_name):
-            if column_name.startswith("0_"):
-                return column_name.replace("0_", "S1_")
-            elif column_name.startswith("1_"):
-                return column_name.replace("1_", "S2_")
-            else:
-                return column_name
+    def rename_columns(column_name):
+        if column_name.startswith("0_"):
+            return column_name.replace("0_", "S1_")
+        elif column_name.startswith("1_"):
+            return column_name.replace("1_", "S2_")
+        else:
+            return column_name
 
-        df_combined.columns = [rename_columns(col) for col in df_combined.columns]
+    df_combined.columns = [rename_columns(col) for col in df_combined.columns]
 
-        df_new=df_combined[['Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)','#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)','S1_Median frequency', 'S1_Positive turning points', 'S1_Zero crossing rate','S1_Fundamental frequency',
+    df_new=df_combined[['Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)','#cs','e_cs (mm)','Fy_ac (MPa)','E_cau (MPa)','G_cau (MPa)','Fycort_pb (MPa)','S1_Median frequency', 'S1_Positive turning points', 'S1_Zero crossing rate','S1_Fundamental frequency',
                   'S1_Spectral roll-on','S1_Neighbourhood peaks','S1_Spectral positive turning points','S1_Power bandwidth','S1_Maximum frequency','S1_Max power spectrum','S2_Median frequency', 'S2_Positive turning points', 'S2_Zero crossing rate','S2_Fundamental frequency',
                   'S2_Spectral roll-on','S2_Neighbourhood peaks','S2_Spectral positive turning points','S2_Power bandwidth','S2_Maximum frequency','S2_Max power spectrum']]
-        df_new
+    df_new
 
         #print(df_transferencia1)
 
-        X_evaluate = escalador.transform(df_new)
+    X_evaluate = escalador.transform(df_new)
 
-        predictions=model_FCDNN.predict(X_evaluate)
+    predictions=model_FCDNN.predict(X_evaluate)
 
         # Convert predictions to class labels
-        predicted_labels = np.argmax(predictions, axis=1)
+    predicted_labels = np.argmax(predictions, axis=1)
 
-        total=len(predicted_labels)
-        nivel_1=0
-        nivel_2=0
-        nivel_3=0
+    total=len(predicted_labels)
+    nivel_1=0
+    nivel_2=0
+    nivel_3=0
 
-        for i in range(total):
-          if predicted_labels[i] == 0:
-              nivel_1+=1
-          elif predicted_labels[i]==1:
-              nivel_2+=1
-          elif predicted_labels[i]==2:
-              nivel_3+=1
+    for i in range(total):
+        if predicted_labels[i] == 0:
+            nivel_1+=1
+        elif predicted_labels[i]==1:
+            nivel_2+=1
+        elif predicted_labels[i]==2:
+            nivel_3+=1
 
-        resultados=[nivel_1,nivel_2,nivel_3]
-        nivel_final=max(resultados)/total*100
-        segundo_nivel=sorted(resultados)[-2]/total*100
-        nivel_mayor=resultados.index(max(resultados))+1
-        nivel_segundo_mayor=resultados.index(sorted(resultados)[-2])+1
-        st.header("RESULTADO")
-        with st.expander('Result of Inspection',expanded=True):
-        #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-            result={
-              'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
-              'Probability':[nivel_final, segundo_nivel]
-            }
-            st.dataframe(result,num_rows='dynamic')
-
-            # CSS para colorear columnas
-            st.markdown(
+    resultados=[nivel_1,nivel_2,nivel_3]
+    nivel_final=max(resultados)/total*100
+    segundo_nivel=sorted(resultados)[-2]/total*100
+    nivel_mayor=resultados.index(max(resultados))+1
+    nivel_segundo_mayor=resultados.index(sorted(resultados)[-2])+1
+    st.header("RESULTADO")
+    with st.expander('Result of Inspection',expanded=True):
+    #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+        result={
+           'Level of Deterioration':['N'+str(nivel_mayor),'N'+str(nivel_segundo_mayor)],
+           'Probability':[nivel_final, segundo_nivel]
+        }
+        st.dataframe(result,num_rows='dynamic')
+        # CSS para colorear columnas
+        st.markdown(
                 """
                 <style>
                 table {
@@ -368,11 +366,11 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E
                 }
                 </style>
                 """,
-                unsafe_allow_html=True
-            )
+            unsafe_allow_html=True
+        )
 
             # Tabla personalizada
-            html_table = """
+        html_table = """
             <table>
                 <thead>
                     <tr>
@@ -430,18 +428,13 @@ def load_dataset(S1,S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S' | 'E
             """
 
             # Mostrar la tabla en Streamlit
-            st.markdown(html_table, unsafe_allow_html=True)
-
-        return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
-  else:
-        st.error("Por favor, sube ambos archivos de señal.")
-        return None
-
+        st.markdown(html_table, unsafe_allow_html=True)
+    return df_combined, resultados  # Asegúrate de que esta variable esté definida en tu lógica
 
 title_alignment="""
 <style>
 #the-title {
-  text-align: center
+enter
 }
 </style>
 """
@@ -578,7 +571,7 @@ with st.expander("Input Signals of LRB",expanded=True):
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
         if S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
             import pandas as pd
-            df = pd.read_csv(S1)
+            df1= pd.read_csv(S1)
             st.write(df.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
@@ -590,10 +583,11 @@ with st.expander("Input Signals of LRB",expanded=True):
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
         if S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
             import pandas as pd
-            df = pd.read_csv(S2)
-            st.write(df.head())  # Muestra las primeras filas del archivo
+            df2 = pd.read_csv(S2)
+            st.write(df2.head())  # Muestra las primeras filas del archivo
     else:
         st.write(" - Aún no se ha subido ningún archivo.")
+
 
 if S1!=None and S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
