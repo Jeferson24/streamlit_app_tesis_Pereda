@@ -480,6 +480,7 @@ with st.sidebar:
 
 # Crear un DataFrame a partir de las variables de entrada
 input_data = {
+    
     'Di (mm)': [Di_mm],
     'Ht (mm)': [Ht_mm],
     'Dl (mm)': [Dl_mm],
@@ -498,96 +499,89 @@ input_data = {
 
 # Convertir el diccionario a un DataFrame
 df_input = pd.DataFrame(input_data)
-
+df_input_transpuesto=df_input.T
 #Manejar en 3 columnas
-columna1, columna2, columna3 = st.columns(3)
-with columna1:
-    # Reemplaza con tu ID de archivo de Google Drive
-    image_file_id = '1vp8Miwsz4P3BfqOHP2SyUgo3pZssN1M8'  # Cambia este ID por el de tu imagen en Google Drive
-    image_url = f"https://drive.google.com/uc?export=download&id={image_file_id}"
+# Reemplaza con tu ID de archivo de Google Drive
+image_file_id = '1vp8Miwsz4P3BfqOHP2SyUgo3pZssN1M8'  # Cambia este ID por el de tu imagen en Google Drive
+image_url = f"https://drive.google.com/uc?export=download&id={image_file_id}"
+# Descargar la imagen
+response = requests.get(image_url)
 
-    # Descargar la imagen
-    response = requests.get(image_url)
+if response.status_code == 200:
+    image = Image.open(BytesIO(response.content))
+else:
+    st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
 
-    if response.status_code == 200:
-        image = Image.open(BytesIO(response.content))
-    else:
-        st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
-
-    with st.expander('Geometric Characteristics of LRB',expanded=True):
-        st.subheader('Geometric Characteristics of LRB')
+with st.expander('Geometric Characteristics of LRB',expanded=True):
+    st.subheader('Geometric Characteristics of LRB')
         #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
         #df
-        st.write("**Tabla de Propiedades Geométricas de Entrada**")
-        st.image(image, caption="Geometric Characteristics of LRB", width=250)
-        # Mostrar los datos de ingreso en una tabla
-        df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
-        st.dataframe(df_input1_Trans.T, hide_index=True)
-with columna2:
-    with st.expander('Mechanics Propierties of LRB',expanded=True):
-        st.subheader('Mechanics Propierties of LRB')
-        #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-        # Mostrar los datos de ingreso en una tabla
-        st.write("**Tabla de Propiedades Mecánicas de Entrada**")
-        df_input2_Trans=df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1)
-        st.dataframe(df_input2_Trans.T, hide_index=True)
-with columna3:
-    with st.expander("Input Signals of LRB",expanded=True):
-        st.subheader('Input Signals of LRB')
+    st.write("**Tabla de Propiedades Geométricas de Entrada**")
+    st.image(image, caption="Geometric Characteristics of LRB", width=250)
+    # Mostrar los datos de ingreso en una tabla
+    df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
+    st.dataframe(df_input1_Trans, hide_index=True)
+with st.expander('Mechanics Propierties of LRB',expanded=True):
+    st.subheader('Mechanics Propierties of LRB')
+    #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
+    # Mostrar los datos de ingreso en una tabla
+    st.write("**Tabla de Propiedades Mecánicas de Entrada**")
+    df_input2_Trans=(df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1))
+    st.dataframe(df_input2_Trans, hide_index=True)
 
-        st.write("Positions of microtremor signals:")
+with st.expander("Input Signals of LRB",expanded=True):
+    st.subheader('Input Signals of LRB')
+    st.write("Positions of microtremor signals:")
+    # Reemplaza con tu ID de archivo de Google Drive
+    input_signal_file_id = '1btCDXwZrCy90sd48B0iZlPIcaohcn79N'  # Cambia este ID por el de tu imagen en Google Drive
+    input_signal_url = f"https://drive.google.com/uc?export=download&id={input_signal_file_id}"
+
+    # Descargar la imagen
+    response = requests.get(input_signal_url)
+
+    if response.status_code == 200:
+        input_signal_image= Image.open(BytesIO(response.content))
+    else:
+        st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+    st.image(input_signal_image, caption=None, width=250)
+    st.write("Format of signal files:")
         # Reemplaza con tu ID de archivo de Google Drive
-        input_signal_file_id = '1btCDXwZrCy90sd48B0iZlPIcaohcn79N'  # Cambia este ID por el de tu imagen en Google Drive
-        input_signal_url = f"https://drive.google.com/uc?export=download&id={input_signal_file_id}"
+    input_signal2_file_id = '1f1a47OhcJ2vDe0gETxog8YFbo-10tLGV'  # Cambia este ID por el de tu imagen en Google Drive
+    input_signal2_url = f"https://drive.google.com/uc?export=download&id={input_signal2_file_id}"
 
-        # Descargar la imagen
-        response = requests.get(input_signal_url)
+    # Descargar la imagen
+    response2 = requests.get(input_signal2_url)
 
-        if response.status_code == 200:
-            input_signal_image= Image.open(BytesIO(response.content))
-        else:
-            st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
-        st.image(input_signal_image, caption=None, width=250)
+    if response2.status_code == 200:
+        input_signal2_image= Image.open(BytesIO(response2.content))
+    else:
+        st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+    st.image(input_signal2_image, caption=None, width=250)
 
-        st.write("Format of signal files:")
-        # Reemplaza con tu ID de archivo de Google Drive
-        input_signal2_file_id = '1f1a47OhcJ2vDe0gETxog8YFbo-10tLGV'  # Cambia este ID por el de tu imagen en Google Drive
-        input_signal2_url = f"https://drive.google.com/uc?export=download&id={input_signal2_file_id}"
+    st.write("**Input Signal 1:**")
+    # Crear un expander para mostrar el estado del archivo
+    if S1 is not None:
+        st.write(" - El archivo ha sido subido correctamente.")
+        # Aquí puedes agregar más lógica para visualizar el contenido del archivo
+        # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
+        if S1.name.endswith(".csv") or S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
+            import pandas as pd
+            df = pd.read_csv(S1)
+            st.write(df.head())  # Muestra las primeras filas del archivo
+    else:
+        st.write(" - Aún no se ha subido ningún archivo.")
+    st.write("**Input Signal 2:**")
 
-        # Descargar la imagen
-        response2 = requests.get(input_signal2_url)
-
-        if response2.status_code == 200:
-            input_signal2_image= Image.open(BytesIO(response2.content))
-        else:
-            st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
-        st.image(input_signal2_image, caption=None, width=250)
-
-        st.write("**Input Signal 1:**")
-        # Crear un expander para mostrar el estado del archivo
-        if S1 is not None:
-            st.write(" - El archivo ha sido subido correctamente.")
-            # Aquí puedes agregar más lógica para visualizar el contenido del archivo
-            # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-            if S1.name.endswith(".csv") or S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
-                import pandas as pd
-                df = pd.read_csv(S1)
-                st.write(df.head())  # Muestra las primeras filas del archivo
-        else:
-            st.write(" - Aún no se ha subido ningún archivo.")
-
-        st.write("**Input Signal 2:**")
-
-        if S2 is not None:
-            st.write(" - El archivo ha sido subido correctamente.")
-            # Aquí puedes agregar más lógica para visualizar el contenido del archivo
-            # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-            if S2.name.endswith(".csv") or S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
-                import pandas as pd
-                df = pd.read_csv(S2)
-                st.write(df.head())  # Muestra las primeras filas del archivo
-        else:
-            st.write(" - Aún no se ha subido ningún archivo.")
+    if S2 is not None:
+        st.write(" - El archivo ha sido subido correctamente.")
+        # Aquí puedes agregar más lógica para visualizar el contenido del archivo
+        # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
+        if S2.name.endswith(".csv") or S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
+            import pandas as pd
+            df = pd.read_csv(S2)
+            st.write(df.head())  # Muestra las primeras filas del archivo
+    else:
+        st.write(" - Aún no se ha subido ningún archivo.")
 
 if S1!=None or S2!=None:
   DF_evaluar,resultados = load_dataset(S1,S2,df_input)
