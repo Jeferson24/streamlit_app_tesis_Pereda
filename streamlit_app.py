@@ -32,9 +32,10 @@ else:
 # Configuración de la página (debe ser lo primero)
 st.set_page_config(page_title='NISAIS LRB', page_icon=favicon1, layout="centered", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
+st.write('Autor: Jeferson Pereda | Asesor: Luis Bedriñana')
 st.info('This is app predict the level of damage of lead rubber bearings')
-st.write('Autor: Jeferson Pereda | Asesor: Luis Bedriñana |')
 st.info('Estudio: CITA ESTUDIO')
+
 # Pie de página con créditos
 footer = """
 <style>
@@ -447,10 +448,10 @@ with st.sidebar:
   
 
   st.write('**Input Signal 1**')
-  S1=st.sidebar.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1")
+  S1=st.sidebar.file_uploader("Choose file in .txt format of Signal 1", key="file_uploader_1",type=["csv", "xlsx", "txt"])
 
   st.write('**Input Signal 2**')
-  S2=st.sidebar.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2")
+  S2=st.sidebar.file_uploader("Choose a file in .txt format of Signal 2",key="file_uploader_2",type=["csv", "xlsx", "txt"])
 
 
   #'Di (mm)','Ht (mm)','Dl (mm)','W (kg)','e_pc (mm)','#cc','e_cc (mm)'
@@ -522,6 +523,7 @@ with columna3:
     with st.expander(None,expanded=True):
         # Crear un expander para mostrar el estado del archivo
         if S1 is not None:
+            st.write("Input Signal 1:")
             st.write("El archivo ha sido subido correctamente.")
             # Aquí puedes agregar más lógica para visualizar el contenido del archivo
             # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
@@ -532,13 +534,14 @@ with columna3:
         else:
             st.write("Aún no se ha subido ningún archivo.")
         # Crear un expander para mostrar el estado del archivo
-        if uploaded_file is not None:
+        if S2 is not None:
+            st.write("Input Signal 2:")
             st.write("El archivo ha sido subido correctamente.")
             # Aquí puedes agregar más lógica para visualizar el contenido del archivo
             # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-            if uploaded_file.name.endswith(".csv"):
+            if S2.name.endswith(".csv"):
                 import pandas as pd
-                df = pd.read_csv(uploaded_file)
+                df = pd.read_csv(S2)
                 st.write(df.head())  # Muestra las primeras filas del archivo
         else:
             st.write("Aún no se ha subido ningún archivo.")
