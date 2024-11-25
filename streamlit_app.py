@@ -547,6 +547,7 @@ with columna3:
             input_signal_image= Image.open(BytesIO(response.content))
         else:
             st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+        st.image(input_signal_image, caption=None, width=200)
 
         st.write("Format of signal files:")
         # Reemplaza con tu ID de archivo de Google Drive
@@ -560,15 +561,25 @@ with columna3:
             input_signal2_image= Image.open(BytesIO(response2.content))
         else:
             st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
+        st.image(input_signal2_image, caption=None, width=200)
 
-
+        st.write("**Input Signal 1:**")
         # Crear un expander para mostrar el estado del archivo
         if S1 is not None:
-            st.write("Input Signal 1:")
-            st.write("El archivo ha sido subido correctamente.")
+
+            st.markdown('''
+            <style>
+            [data-testid="stMarkdownContainer"] ul{
+                list-style-position: inside;
+            }
+            </style>
+            ''', unsafe_allow_html=True)
+
+            st.markdown("- El archivo ha sido subido correctamente.")
+      
             # Aquí puedes agregar más lógica para visualizar el contenido del archivo
             # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-            if S1.name.endswith(".csv"):
+            if S1.name.endswith(".csv") or S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
                 import pandas as pd
                 df = pd.read_csv(S1)
                 st.write(df.head())  # Muestra las primeras filas del archivo
@@ -576,11 +587,19 @@ with columna3:
             st.write("Aún no se ha subido ningún archivo.")
         # Crear un expander para mostrar el estado del archivo
         if S2 is not None:
-            st.write("Input Signal 2:")
-            st.write("El archivo ha sido subido correctamente.")
+            st.write("**Input Signal 2:**")
+            st.markdown('''
+            <style>
+            [data-testid="stMarkdownContainer"] ul{
+                list-style-position: inside;
+            }
+            </style>
+            ''', unsafe_allow_html=True)
+
+            st.markdown("- El archivo ha sido subido correctamente.")
             # Aquí puedes agregar más lógica para visualizar el contenido del archivo
             # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
-            if S2.name.endswith(".csv"):
+            if S2.name.endswith(".csv") or S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
                 import pandas as pd
                 df = pd.read_csv(S2)
                 st.write(df.head())  # Muestra las primeras filas del archivo
