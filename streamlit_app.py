@@ -30,7 +30,7 @@ else:
     st.error("No se pudo cargar la imagen. Verifica el enlace o el ID del archivo.")
 
 # Configuración de la página (debe ser lo primero)
-st.set_page_config(page_title='NISAIS LRB', page_icon=favicon1, layout="centered", initial_sidebar_state="expanded", menu_items=None)
+st.set_page_config(page_title='NISAIS LRB', page_icon=favicon1, layout="wide", initial_sidebar_state="expanded", menu_items=None)
 st.title('Non-invasive semi-automatic inspection system for lead rubber bearings (LRB)')
 st.write('Autor: Jeferson Pereda | Asesor: Luis Bedriñana')
 st.info('''
@@ -38,27 +38,22 @@ This is app predict the level of damage of lead rubber bearings
 Estudio: CITA ESTUDIO
         ''')
 
-
-#Pagina config
-page_config="""
+#Configuracion de página
+# Agregar CSS para justificar el texto y eliminar la barra blanca superior
+st.markdown("""
     <style>
-        /* Reducir márgenes de la página */
-        .reportview-container {
-            margin: 0;
-            padding: 0;
+        /* Eliminar la barra blanca superior */
+        .css-18e3th9 {  /* Selector de la barra blanca superior */
+            padding-top: 0px;
         }
-        .main {
-            padding: 0;
+
+        /* Justificar todo el texto */
+        .markdown-text-container p {
+            text-align: justify;
         }
-        .block-container {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
+
     </style>
-"""
-st.markdown(page_config, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # Pie de página con créditos
 footer = """
