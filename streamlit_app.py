@@ -419,11 +419,11 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
                         <td class="col5">d) Elementos con corrosión o sulfatación en la mayor parte de su área</td>
                     </tr>
                     <tr>
-                        <td class="col1">ESTADO DE CAUCHO</td>
-                        <td class="col2">d) Material desprendido y fisuras superficiales</td>
-                        <td class="col3">c) Con materia extraña superficial o indicios de degradación por ozono</td>
-                        <td class="col4">b) Con materia extraña superficial, sin degradación</td>
-                        <td class="col5">a) Sin materia extraña ni agrietamiento superficial</td>
+                        <td class="col1" style="color: white;">ESTADO DE CAUCHO</td>
+                        <td class="col2" style="color: white;">d) Material desprendido y fisuras superficiales</td>
+                        <td class="col3" style="color: white;">c) Con materia extraña superficial o indicios de degradación por ozono</td>
+                        <td class="col4" style="color: white;">b) Con materia extraña superficial, sin degradación</td>
+                        <td class="col5" style="color: white;">a) Sin materia extraña ni agrietamiento superficial</td>
                     </tr>
                 </tbody>
             </table>
