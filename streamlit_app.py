@@ -395,35 +395,35 @@ def load_dataset(df_S1,df_S2,prop_GM):   #Columnas S1:   'Fecha' | 'Hora' | 'N-S
                         <td class="col2">0%-2%</td>
                         <td class="col3">2%-4%</td>
                         <td class="col4">4%-6%</td>
-                        <td class="col5" style="color: white;">6%&lt;</td>
+                        <td class="col5" style="color: white;  font-weight: bold;">6%&lt;</td>
                     </tr>
                     <tr>
                         <td class="col1">DISTORSIÓN HORIZONTAL PORCENTUAL (deformación por corte)</td>
                         <td class="col2">0%-5%</td>
                         <td class="col3">5%-10%</td>
                         <td class="col4">10%-15%</td>
-                        <td class="col5" style="color: white;">15%&lt;</td>
+                        <td class="col5" style="color: white;  font-weight: bold;">15%&lt;</td>
                     </tr>
                     <tr>
                         <td class="col1">LONGITUD FISURA MÁXIMA (% respecto al diámetro)</td>
                         <td class="col2">0%-5%</td>
                         <td class="col3">5%-10%</td>
                         <td class="col4">10%-15%</td>
-                        <td class="col5" style="color: white;">15%&lt;</td>
+                        <td class="col5" style="color: white;  font-weight: bold;">15%&lt;</td>
                     </tr>
                     <tr>
                         <td class="col1">GRADO DE CORROSIÓN (piezas de acero, pernos y placas)</td>
                         <td class="col2">a) Elementos sin corrosión ni sulfatación visible</td>
                         <td class="col3">b) Pernos con manchas de corrosión o sulfatación</td>
                         <td class="col4">c) Pernos y placa con manchas de corrosión o sulfatación</td>
-                        <td class="col5" style="color: white;">d) Elementos con corrosión o sulfatación en la mayor parte de su área</td>
+                        <td class="col5" style="color: white;  font-weight: bold;">d) Elementos con corrosión o sulfatación en la mayor parte de su área</td>
                     </tr>
                     <tr>
                         <td class="col1">ESTADO DE CAUCHO</td>
                         <td class="col2">d) Material desprendido y fisuras superficiales</td>
                         <td class="col3">c) Con materia extraña superficial o indicios de degradación por ozono</td>
                         <td class="col4">b) Con materia extraña superficial, sin degradación</td>
-                        <td class="col5"style="color: white;">a) Sin materia extraña ni agrietamiento superficial</td>
+                        <td class="col5"style="color: white;  font-weight: bold;" >a) Sin materia extraña ni agrietamiento superficial</td>
                     </tr>
                 </tbody>
             </table>
