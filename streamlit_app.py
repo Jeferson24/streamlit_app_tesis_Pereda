@@ -37,7 +37,7 @@ st.write('Autor: Jeferson Pereda | Asesor: Luis Bedriñana')
 st.info('''
     This is app predict the level of damage of lead rubber bearings
         
-    Estudio: CITA ESTUDIO
+    Reference: Pereda, J. (2024). Non-invasive semi-automatic inspection system for lead rubber bearings (LRB) [Tesis de grado]. Universidad de Ingeniería y Tecnología.
         ''')
 
 # Pie de página con créditos
@@ -55,7 +55,7 @@ footer = """
     }
 </style>
 <div class="footer">
-    Desarrollado por <a href="https://www.linkedin.com/in/jefersonpereda/" target="_blank">Pereda, J</a> © 2024.
+    Developed by <a href="https://www.linkedin.com/in/jefersonpereda/" target="_blank">Pereda, J</a> © 2024.
 </div>
 """
 st.markdown(footer, unsafe_allow_html=True)
@@ -524,7 +524,7 @@ with st.expander('Geometric Characteristics of LRB',expanded=True):
     #st.subheader('Geometric Characteristics of LRB')
         #df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
         #df
-    st.write("**Tabla de Propiedades Geométricas de Entrada**")
+    st.write("**Input Geometric Properties Table**")
     st.image(image, caption="Geometric Characteristics of LRB", width=400)
     # Mostrar los datos de ingreso en una tabla
     df_input1_Trans=df_input.drop(['Fy_ac (MPa)', 'E_cau (MPa)', 'G_cau (MPa)', 'Fycort_pb (MPa)'],axis=1)
@@ -533,7 +533,7 @@ with st.expander('Mechanics Propierties of LRB',expanded=True):
     st.markdown("<h1 style='text-align: center; color: black;'>Mechanics Propierties of LRB</h1>", unsafe_allow_html=True)
     #st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
     # Mostrar los datos de ingreso en una tabla
-    st.write("**Tabla de Propiedades Mecánicas de Entrada**")
+    st.write("**Input Mechanical Properties Table**")
     df_input2_Trans=(df_input.drop(['Di (mm)', 'Ht (mm)', 'Dl (mm)', 'W (kg)', 'e_pc (mm)', '#cc', 'e_cc (mm)', '#cs', 'e_cs (mm)'],axis=1))
     st.dataframe(df_input2_Trans, hide_index=True)
 
@@ -570,7 +570,7 @@ with st.expander("Input Signals of LRB",expanded=True):
     st.write("**Input Signal 1:**")
     # Crear un expander para mostrar el estado del archivo
     if S1 is not None:
-        st.write(" - El archivo ha sido subido correctamente.")
+        st.write(" - File has been uploaded successfully.")
         # Aquí puedes agregar más lógica para visualizar el contenido del archivo
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
         if S1.name.endswith(".txt") or S1.name.endswith(".xlsx"):
@@ -578,11 +578,11 @@ with st.expander("Input Signals of LRB",expanded=True):
             df_S1 = df_S1.loc[:, ~df_S1.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
             st.write(df_S1.head())  # Muestra las primeras filas del archivo
     else:
-        st.write(" - Aún no se ha subido ningún archivo.")
+        st.write(" - File has not been uploaded yet.")
     st.write("**Input Signal 2:**")
 
     if S2 is not None:
-        st.write(" - El archivo ha sido subido correctamente.")
+        st.write(" - File has been uploaded successfully.")
         # Aquí puedes agregar más lógica para visualizar el contenido del archivo
         # Por ejemplo, si es un CSV, puedes mostrar las primeras filas:
         if S2.name.endswith(".txt") or S2.name.endswith(".xlsx"):
@@ -590,7 +590,7 @@ with st.expander("Input Signals of LRB",expanded=True):
             df_S2 = df_S2.loc[:, ~df_S2.columns.str.contains('^Unnamed')] #Eliminar columna unnamed
             st.write(df_S2.head())  # Muestra las primeras filas del archivo
     else:
-        st.write(" - Aún no se ha subido ningún archivo.")
+        st.write(" - File has not been uploaded yet.")
 
 
 if S1!=None and S2!=None:
